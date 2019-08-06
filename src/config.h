@@ -1,0 +1,2 @@
+#define sfml_starfighter_VERSION_MAJOR 0
+#define sfml_starfighter_VERSION_MINOR 1
