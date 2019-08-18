@@ -7,8 +7,8 @@
 
 int main() {
   std::stringstream title;
-  title << "SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR << "."
-        << SP9k_VERSION_PATCH << std::endl;
+  title << "SFML | SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
+        << "." << SP9k_VERSION_PATCH << std::endl;
   std::cout << title.str() << std::endl;
 
   sf::RenderWindow window(sf::VideoMode(600, 400), title.str());
