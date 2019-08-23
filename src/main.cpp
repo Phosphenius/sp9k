@@ -14,6 +14,16 @@ int main() {
   sf::RenderWindow window(sf::VideoMode(600, 400), title.str());
   window.setFramerateLimit(60);
 
+  sf::Texture tex;
+
+  if (!tex.loadFromFile("gfx/ship1.png")) {
+      std::cerr << "Cannot load texture" << std::endl;
+      return 1;
+  }
+
+  sf::Sprite sprite;
+  sprite.setTexture(tex);
+
   while (window.isOpen()) {
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -22,6 +32,7 @@ int main() {
     }
 
     window.clear();
+    window.draw(sprite);
     window.display();
   }
 
