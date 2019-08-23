@@ -11,7 +11,7 @@ int main() {
         << "." << SP9k_VERSION_PATCH << std::endl;
   std::cout << title.str() << std::endl;
 
-  sf::RenderWindow window(sf::VideoMode(600, 400), title.str());
+  sf::RenderWindow window(sf::VideoMode(960, 720), title.str());
   window.setFramerateLimit(60);
 
   sf::Texture tex;
