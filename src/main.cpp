@@ -17,8 +17,8 @@ int main() {
   sf::Texture tex;
 
   if (!tex.loadFromFile("gfx/ship1.png")) {
-      std::cerr << "Cannot load texture" << std::endl;
-      return 1;
+    std::cerr << "Cannot load texture" << std::endl;
+    return 1;
   }
 
   sf::Sprite sprite;
