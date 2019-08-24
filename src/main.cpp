@@ -33,6 +33,18 @@ int main() {
         window.close();
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+      sprite.move(-10.0f, .0f);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+      sprite.move(10.0f, .0f);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+      sprite.move(.0f, -10.0f);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+      sprite.move(.0f, 10.0f);
+    }
+
     window.clear();
     window.draw(sprite);
     window.display();
