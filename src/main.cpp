@@ -23,6 +23,8 @@ int main() {
 
   sf::Sprite sprite;
   sprite.setTexture(tex);
+  sprite.setOrigin(sf::Vector2f(tex.getSize().x / 2, tex.getSize().y / 2));
+  sprite.setPosition(480, 360);
 
   while (window.isOpen()) {
     sf::Event event;
