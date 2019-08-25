@@ -70,6 +70,22 @@ int main() {
 
     sprite.move(velocity * dt);
 
+    sf::Vector2f sprite_pos = sprite.getPosition();
+
+    if (sprite_pos.x <= 0) {
+        sprite_pos.x = 0;
+    } else if (sprite_pos.x >= 960) {
+        sprite_pos.x = 960;
+    }
+
+    if (sprite_pos.y <= 0) {
+        sprite_pos.y = 0;
+    } else if (sprite_pos.y >= 720) {
+        sprite_pos.y = 720;
+    }
+
+    sprite.setPosition(sprite_pos);
+
     window.clear();
     window.draw(sprite);
     window.display();
