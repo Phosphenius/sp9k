@@ -1,5 +1,6 @@
 #include "config.h"
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <array>
 #include <iostream>
 #include <sstream>
@@ -14,12 +15,20 @@ int main() {
   sf::RenderWindow window(sf::VideoMode(960, 720), title.str());
   window.setFramerateLimit(60);
 
+  sf::Clock clock;
+
   sf::Texture tex;
 
   if (!tex.loadFromFile("gfx/ship1.png")) {
     std::cerr << "Cannot load texture" << std::endl;
     return 1;
   }
+
+  sf::Vector2f accel;
+  sf::Vector2f velocity;
+  float maxVelocity = 500.0f;
+  float maxAccel = 40.0f;
+  float accelGain = 550.0f;
 
   sf::Sprite sprite;
   sprite.setTexture(tex);
@@ -33,17 +42,33 @@ int main() {
         window.close();
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-      sprite.move(-10.0f, .0f);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-      sprite.move(10.0f, .0f);
+    float dt = clock.restart().asSeconds();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && accel.x > -maxAccel) {
+      accel.x -= accelGain * dt;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+               accel.x < maxAccel) {
+      accel.x += accelGain * dt;
+    } else {
+      accel.x = 0;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-      sprite.move(.0f, -10.0f);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-      sprite.move(.0f, 10.0f);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && accel.y > -maxAccel) {
+      accel.y -= accelGain * dt;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+               accel.y < maxAccel) {
+      accel.y += accelGain * dt;
+    } else {
+      accel.y = 0;
     }
+
+    velocity += accel;
+    velocity *= 0.965f;
+
+    velocity.x = std::clamp(velocity.x, -maxVelocity, maxVelocity);
+    velocity.y = std::clamp(velocity.y, -maxVelocity, maxVelocity);
+
+    sprite.move(velocity * dt);
 
     window.clear();
     window.draw(sprite);
