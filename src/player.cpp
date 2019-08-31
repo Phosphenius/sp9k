@@ -2,8 +2,7 @@
 
 namespace sp9k {
 
-Player::Player() {
-  texture.loadFromFile("gfx/ship1.png");
+Player::Player(const sf::Texture &texture) {
   sprite.setTexture(texture);
   sprite.setOrigin(
       sf::Vector2f(texture.getSize().x / 2, texture.getSize().y / 2));

@@ -5,7 +5,6 @@
 
 namespace sp9k {
 class Player {
-  sf::Texture texture;
   sf::Sprite sprite;
   sf::Vector2f accel;
   sf::Vector2f velocity;
@@ -14,7 +13,7 @@ class Player {
   float accelGain = 550.0f;
 
 public:
-  Player();
+  Player(const sf::Texture &texture);
   void update(float dt);
   void draw(sf::RenderWindow &window);
 };

@@ -1,7 +1,9 @@
 #include "game.h"
 
 namespace sp9k {
-Game::Game(std::string title) : window(sf::VideoMode(960, 720), title) {
+Game::Game(std::string title)
+    : window(sf::VideoMode(960, 720), title),
+      player(textureManager.getTexture("ship1")) {
   window.setFramerateLimit(60);
 }
 
