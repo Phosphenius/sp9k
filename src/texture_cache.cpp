@@ -1,13 +1,15 @@
-#include "texture_manager.h"
+// Loads textures from disk and holds them in memory
+
+#include "texture_cache.h"
 #include <SFML/Graphics.hpp>
 #include <filesystem>
 
 namespace fs = std::filesystem;
 
 namespace sp9k {
-TextureManager::TextureManager() {
+TextureCache::TextureCache() {
   for (auto &entry : fs::directory_iterator("gfx")) {
-    std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
+    std::unique_ptr<NCTexture> texture = std::make_unique<NCTexture>();
     texture->loadFromFile(entry.path());
 
     std::string filename = entry.path().filename();
@@ -16,7 +18,7 @@ TextureManager::TextureManager() {
   }
 }
 
-const sf::Texture &TextureManager::getTexture(std::string name) {
+const NCTexture &TextureCache::getTexture(std::string name) {
   return *textures.at(name);
 }
 } // namespace sp9k

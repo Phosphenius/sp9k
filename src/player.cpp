@@ -2,55 +2,38 @@
 
 namespace sp9k {
 
-Player::Player(const sf::Texture &texture) {
-  sprite.setTexture(texture);
-  sprite.setOrigin(
-      sf::Vector2f(texture.getSize().x / 2, texture.getSize().y / 2));
-  sprite.setPosition(480, 360);
+Player::Player(sf::Vector2f pos)
+    : pos(pos), accel(sf::Vector2f(0, 0)), velocity(sf::Vector2f(0, 0)) {}
+
+sf::Vector2f Player::getPos() {
+    return pos;
 }
+
 void Player::update(float dt) {
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && accel.x > -maxAccel) {
-    accel.x -= accelGain * dt;
-  } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
-             accel.x < maxAccel) {
-    accel.x += accelGain * dt;
-  } else {
-    accel.x = 0;
-  }
-
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && accel.y > -maxAccel) {
-    accel.y -= accelGain * dt;
-  } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
-             accel.y < maxAccel) {
-    accel.y += accelGain * dt;
-  } else {
-    accel.y = 0;
-  }
-
   velocity += accel;
-  velocity *= 0.965f;
+  velocity *= 0.965f; // "friction"
 
   velocity.x = std::clamp(velocity.x, -maxVelocity, maxVelocity);
   velocity.y = std::clamp(velocity.y, -maxVelocity, maxVelocity);
 
-  sprite.move(velocity * dt);
+  pos += velocity * dt;
 
-  sf::Vector2f sprite_pos = sprite.getPosition();
-
-  if (sprite_pos.x <= 0) {
-    sprite_pos.x = 0;
-  } else if (sprite_pos.x >= 960) {
-    sprite_pos.x = 960;
+  if (pos.x <= 0) {
+    pos.x = 0;
+  } else if (pos.x >= 960) {
+    pos.x = 960;
   }
 
-  if (sprite_pos.y <= 0) {
-    sprite_pos.y = 0;
-  } else if (sprite_pos.y >= 720) {
-    sprite_pos.y = 720;
+  if (pos.y <= 0) {
+    pos.y = 0;
+  } else if (pos.y >= 720) {
+    pos.y = 720;
   }
-
-  sprite.setPosition(sprite_pos);
 }
 
-void Player::draw(sf::RenderWindow &window) { window.draw(sprite); }
+void Player::setAccel(sf::Vector2f accel) {
+  this->accel.x = std::clamp(accel.x, -maxAccel, maxAccel);
+  this->accel.y = std::clamp(accel.y, -maxAccel, maxAccel);
+}
+
 } // namespace sp9k
