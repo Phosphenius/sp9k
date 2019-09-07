@@ -9,6 +9,7 @@ class Bullet {
 public:
   sf::Vector2f pos;
   sf::Vector2f velocity;
+  float radius;
 
   Bullet(sf::Vector2f pos, sf::Vector2f velocity);
 };

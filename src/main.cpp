@@ -35,6 +35,8 @@ int main() {
   sp9k::Renderer renderer(window, textureCache);
   sp9k::Player player(sf::Vector2f(480, 360));
 
+  renderer.renderBounds = true;
+
   std::vector<std::unique_ptr<sp9k::Bullet>> bullets;
 
   float elapsed_t = 0.f;

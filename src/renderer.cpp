@@ -12,13 +12,32 @@ void Renderer::renderSprite(sf::Vector2f pos, std::string texName) {
   window.draw(sprite);
 }
 
+void Renderer::renderCircle(sf::Vector2f pos, float radius) {
+  sf::CircleShape circle(radius);
+  circle.setPosition(pos);
+  circle.setOrigin(sf::Vector2f(radius, radius));
+  circle.setFillColor(sf::Color::Transparent);
+  circle.setOutlineThickness(1);
+
+  window.draw(circle);
+}
+
 void Renderer::render(Player &player) {
-    renderSprite(player.pos, "ship1");
+  renderSprite(player.pos, "ship1");
+  if (renderBounds) {
+    renderCircle(player.pos, player.radius);
+  }
 }
 
 void Renderer::render(std::vector<std::unique_ptr<Bullet>> &bullets) {
   for (auto &bullet : bullets) {
     renderSprite(bullet->pos, "shot1");
+
+    if (!renderBounds) {
+      continue;
+    }
+
+    renderCircle(bullet->pos, bullet->radius);
   }
 }
 

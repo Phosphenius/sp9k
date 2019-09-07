@@ -3,7 +3,7 @@
 namespace sp9k {
 
 Player::Player(sf::Vector2f pos)
-    : accel(sf::Vector2f(0, 0)), pos(pos), velocity(sf::Vector2f(0, 0)) {}
+    : accel(sf::Vector2f(0, 0)), pos(pos), velocity(sf::Vector2f(0, 0)), radius(40) {}
 
 void Player::update(float dt) {
   velocity += accel * dt;
