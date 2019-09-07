@@ -2,17 +2,20 @@
 #define RENDERER_H
 
 #include "texture_cache.h"
+#include "bullet.h"
+#include "player.h"
 
 namespace sp9k {
 class Renderer {
   sf::RenderWindow &window;
   TextureCache &textureCache;
+  void renderSprite(sf::Vector2f pos, std::string texName);
 
 public:
   Renderer(sf::RenderWindow &window, TextureCache &textureCache)
       : window(window), textureCache(textureCache){};
-  void renderTexture(std::string texName, sf::Vector2f pos);
-  void renderTextureCentered(std::string texName, sf::Vector2f pos);
+  void render(Player &player);
+  void render(std::vector<std::unique_ptr<Bullet>> &bullets);
 };
 
 } // namespace sp9k

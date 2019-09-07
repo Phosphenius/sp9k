@@ -1,3 +1,4 @@
+#include "bullet.h"
 #include "config.h"
 #include "player.h"
 #include "renderer.h"
@@ -34,6 +35,10 @@ int main() {
   sp9k::Renderer renderer(window, textureCache);
   sp9k::Player player(sf::Vector2f(480, 360));
 
+  std::vector<std::unique_ptr<sp9k::Bullet>> bullets;
+
+  float elapsed_t = 0.f;
+
   while (window.isOpen()) {
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -42,6 +47,7 @@ int main() {
     }
 
     float dt = clock.restart().asSeconds();
+    elapsed_t += dt;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
       player.accel.x = -1200;
@@ -59,6 +65,29 @@ int main() {
       player.accel.y = 0;
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && elapsed_t >= 0.2) {
+      elapsed_t = 0.f;
+
+      sf::Vector2f offset1(-12, -50);
+      sf::Vector2f offset2(12, -50);
+
+      bullets.push_back(std::make_unique<sp9k::Bullet>(player.pos + offset1,
+                                                       sf::Vector2f(0, -600)));
+
+      bullets.push_back(std::make_unique<sp9k::Bullet>(player.pos + offset2,
+                                                       sf::Vector2f(0, -600)));
+    }
+
+    for (size_t i = 0; i < bullets.size(); ++i) {
+      if (bullets[i]->pos.y <= -200) {
+        bullets.erase(bullets.begin() + i);
+      }
+    }
+
+    for (auto &bullet : bullets) {
+      bullet->pos += bullet->velocity * dt;
+    }
+
     std::stringstream fps;
     fps << "FPS: " << static_cast<int>(1.f / dt);
     fpsText.setString(fps.str());
@@ -74,7 +103,8 @@ int main() {
     player.update(dt);
 
     window.clear();
-    renderer.renderTextureCentered("ship1", player.pos);
+    renderer.render(player);
+    renderer.render(bullets);
     window.draw(fpsText);
     window.draw(statsText);
     window.display();
