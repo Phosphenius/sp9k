@@ -20,11 +20,15 @@ int main() {
 
   font.loadFromFile("fonts/Xolonium-Regular.ttf");
 
-  sf::Text text;
-  text.setFont(font);
-  text.setCharacterSize(12);
-  text.setFillColor(sf::Color::White);
-  text.setPosition(5, 703);
+  sf::Text fpsText;
+  fpsText.setFont(font);
+  fpsText.setCharacterSize(12);
+  fpsText.setFillColor(sf::Color::White);
+  fpsText.setPosition(5, 703);
+
+  sf::Text statsText("", font, 12);
+  statsText.setFillColor(sf::Color::White);
+  statsText.setPosition(5, 5);
 
   sp9k::TextureCache textureCache;
   sp9k::Renderer renderer(window, textureCache);
@@ -39,35 +43,40 @@ int main() {
 
     float dt = clock.restart().asSeconds();
 
-    sf::Vector2f accel;
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-      accel.x = -550;
+      player.accel.x = -1200;
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-      accel.x = 550;
+      player.accel.x = 1200;
     } else {
-      accel.x = 0;
+      player.accel.x = 0;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        accel.y = -550;
+      player.accel.y = -1750;
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        accel.y = 550;
+      player.accel.y = 1000;
     } else {
-        accel.y = 0;
+      player.accel.y = 0;
     }
-
-    player.setAccel(accel * dt);
 
     std::stringstream fps;
     fps << "FPS: " << static_cast<int>(1.f / dt);
-    text.setString(fps.str());
+    fpsText.setString(fps.str());
+
+    std::stringstream stats;
+    stats << "Pos: " << static_cast<int>(player.pos.x) << ", "
+          << static_cast<int>(player.pos.y) << std::endl
+          << "Accel: " << player.accel.x << ", " << player.accel.y << std::endl
+          << "Velocity: " << player.velocity.x << ", " << player.velocity.y
+          << std::endl;
+    statsText.setString(stats.str());
 
     player.update(dt);
 
     window.clear();
-    renderer.renderTextureCentered("ship1", player.getPos());
-    window.draw(text);
+    renderer.renderTextureCentered("ship1", player.pos);
+    window.draw(fpsText);
+    window.draw(statsText);
     window.display();
   }
 
