@@ -15,6 +15,7 @@ int main() {
 
   sf::RenderWindow window(sf::VideoMode(960, 720), title.str());
   window.setFramerateLimit(60);
+  window.setVerticalSyncEnabled(true);
   sf::Clock clock;
 
   sf::Font font;
