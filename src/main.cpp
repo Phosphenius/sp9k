@@ -36,7 +36,9 @@ int main() {
   sp9k::Renderer renderer(window, textureCache);
   sp9k::Player player(sf::Vector2f(480, 360));
 
+#ifndef NDEBUG
   renderer.renderBounds = true;
+#endif
 
   std::vector<std::unique_ptr<sp9k::Bullet>> bullets;
 
@@ -95,6 +97,7 @@ int main() {
     fps << "FPS: " << static_cast<int>(1.f / dt);
     fpsText.setString(fps.str());
 
+#ifndef NDEBUG
     std::stringstream stats;
     stats << "Pos: " << static_cast<int>(player.pos.x) << ", "
           << static_cast<int>(player.pos.y) << std::endl
@@ -102,6 +105,7 @@ int main() {
           << "Velocity: " << player.velocity.x << ", " << player.velocity.y
           << std::endl;
     statsText.setString(stats.str());
+#endif
 
     player.update(dt);
 
@@ -109,7 +113,9 @@ int main() {
     renderer.render(player);
     renderer.render(bullets);
     window.draw(fpsText);
+#ifndef NDEBUG
     window.draw(statsText);
+#endif
     window.display();
   }
 
