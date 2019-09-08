@@ -1,6 +1,7 @@
 #include "bullet.h"
 
 namespace sp9k {
-Bullet::Bullet(sf::Vector2f pos, sf::Vector2f velocity)
-    : pos(pos), velocity(velocity), radius(10) {}
+Bullet::Bullet(sf::Vector2f position, sf::Vector2f velocity)
+    : Entity(position, velocity, 10) {}
+void Bullet::update(float dt) { position += velocity * dt; }
 } // namespace sp9k

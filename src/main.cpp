@@ -76,21 +76,21 @@ int main() {
       sf::Vector2f offset1(-12, -50);
       sf::Vector2f offset2(12, -50);
 
-      bullets.push_back(std::make_unique<sp9k::Bullet>(player.pos + offset1,
+      bullets.push_back(std::make_unique<sp9k::Bullet>(player.position + offset1,
                                                        sf::Vector2f(0, -600)));
 
-      bullets.push_back(std::make_unique<sp9k::Bullet>(player.pos + offset2,
+      bullets.push_back(std::make_unique<sp9k::Bullet>(player.position + offset2,
                                                        sf::Vector2f(0, -600)));
     }
 
     for (size_t i = 0; i < bullets.size(); ++i) {
-      if (bullets[i]->pos.y <= -200) {
+      if (bullets[i]->position.y <= -200) {
         bullets.erase(bullets.begin() + i);
       }
     }
 
     for (auto &bullet : bullets) {
-      bullet->pos += bullet->velocity * dt;
+      bullet->update(dt);
     }
 
     std::stringstream fps;
@@ -99,8 +99,8 @@ int main() {
 
 #ifndef NDEBUG
     std::stringstream stats;
-    stats << "Pos: " << static_cast<int>(player.pos.x) << ", "
-          << static_cast<int>(player.pos.y) << std::endl
+    stats << "Pos: " << static_cast<int>(player.position.x) << ", "
+          << static_cast<int>(player.position.y) << std::endl
           << "Accel: " << player.accel.x << ", " << player.accel.y << std::endl
           << "Velocity: " << player.velocity.x << ", " << player.velocity.y
           << std::endl;

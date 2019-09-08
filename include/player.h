@@ -1,19 +1,18 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "entity.h"
 #include <SFML/Graphics.hpp>
 
 namespace sp9k {
-class Player {
+class Player : public Entity{
+  // TODO: Check best practices for constants as class members
   const float maxVelocity = 450.0f;
 
 public:
   sf::Vector2f accel;
-  sf::Vector2f pos;
-  sf::Vector2f velocity;
-  float radius;
 
-  Player(sf::Vector2f pos);
+  Player(sf::Vector2f position);
   void update(float dt);
 };
 } // namespace sp9k

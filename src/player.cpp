@@ -2,31 +2,32 @@
 
 namespace sp9k {
 
-Player::Player(sf::Vector2f pos)
-    : accel(sf::Vector2f(0, 0)), pos(pos), velocity(sf::Vector2f(0, 0)), radius(40) {}
+Player::Player(sf::Vector2f position)
+    : Entity(position, {0, 0}, 40), accel(sf::Vector2f(0, 0)) {}
 
 void Player::update(float dt) {
   velocity += accel * dt;
-  velocity *= 0.965f; // "friction"
+  // FIXME probably not frame rate independent
+  velocity *= (0.965f + dt); // "friction"
 
   velocity.x = std::clamp(velocity.x, -maxVelocity, maxVelocity);
   velocity.y = std::clamp(velocity.y, -maxVelocity, maxVelocity);
 
-  pos += velocity * dt;
+  position += velocity * dt;
 
-  if (pos.x <= 0) {
-    pos.x = 0;
+  if (position.x <= 0) {
+    position.x = 0;
     velocity.x = 0;
-  } else if (pos.x >= 960) {
-    pos.x = 960;
+  } else if (position.x >= 960) {
+    position.x = 960;
     velocity.x = 0;
   }
 
-  if (pos.y <= 0) {
-    pos.y = 0;
+  if (position.y <= 0) {
+    position.y = 0;
     velocity.y = 0;
-  } else if (pos.y >= 720) {
-    pos.y = 720;
+  } else if (position.y >= 720) {
+    position.y = 720;
     velocity.y = 0;
   }
 }

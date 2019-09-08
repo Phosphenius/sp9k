@@ -23,21 +23,21 @@ void Renderer::renderCircle(sf::Vector2f pos, float radius) {
 }
 
 void Renderer::render(Player &player) {
-  renderSprite(player.pos, "ship1");
+  renderSprite(player.position, "ship1");
   if (renderBounds) {
-    renderCircle(player.pos, player.radius);
+    renderCircle(player.position, player.radius);
   }
 }
 
 void Renderer::render(std::vector<std::unique_ptr<Bullet>> &bullets) {
   for (auto &bullet : bullets) {
-    renderSprite(bullet->pos, "shot1");
+    renderSprite(bullet->position, "shot1");
 
     if (!renderBounds) {
       continue;
     }
 
-    renderCircle(bullet->pos, bullet->radius);
+    renderCircle(bullet->position, bullet->radius);
   }
 }
 

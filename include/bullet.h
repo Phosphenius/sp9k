@@ -1,17 +1,15 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include "entity.h"
 #include <SFML/Graphics.hpp>
 
 namespace sp9k {
-class Bullet {
+class Bullet : public Entity {
 
 public:
-  sf::Vector2f pos;
-  sf::Vector2f velocity;
-  float radius;
-
-  Bullet(sf::Vector2f pos, sf::Vector2f velocity);
+  Bullet(sf::Vector2f position, sf::Vector2f velocity);
+  void update(float dt);
 };
 } // namespace sp9k
 #endif
