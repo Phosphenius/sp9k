@@ -1,5 +1,6 @@
 #include "bullet.h"
 #include "config.h"
+#include "enemy.h"
 #include "player.h"
 #include "renderer.h"
 #include "texture_cache.h"
@@ -41,6 +42,10 @@ int main() {
 #endif
 
   std::vector<std::unique_ptr<sp9k::Bullet>> bullets;
+
+  std::vector<sp9k::Enemy> enemies;
+
+  enemies.emplace_back(sf::Vector2f(50, 50), sf::Vector2f(0, 0));
 
   float elapsed_t = 0.f;
 
@@ -93,6 +98,10 @@ int main() {
       bullet->update(dt);
     }
 
+    for (auto &enemy : enemies) {
+      enemy.update(dt);
+    }
+
     std::stringstream fps;
     fps << "FPS: " << static_cast<int>(1.f / dt);
     fpsText.setString(fps.str());
@@ -112,6 +121,7 @@ int main() {
     window.clear();
     renderer.render(player);
     renderer.render(bullets);
+    renderer.render(enemies);
     window.draw(fpsText);
 #ifndef NDEBUG
     window.draw(statsText);

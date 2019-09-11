@@ -41,4 +41,24 @@ void Renderer::render(std::vector<std::unique_ptr<Bullet>> &bullets) {
   }
 }
 
+void Renderer::render(std::vector<Enemy> &enemies) {
+  for (auto &enemy : enemies) {
+
+    sf::Sprite sprite;
+
+    auto &tex = textureCache.getTexture("ship2");
+    sprite.setTexture(tex);
+    sprite.setPosition(enemy.position);
+    sprite.setRotation(180);
+    sprite.setOrigin(tex.getSize().x / 2, tex.getSize().y / 2);
+
+    window.draw(sprite);
+    if (!renderBounds) {
+      continue;
+    }
+
+    renderCircle(enemy.position, enemy.radius);
+  }
+}
+
 } // namespace sp9k

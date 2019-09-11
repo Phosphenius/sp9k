@@ -1,9 +1,10 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "texture_cache.h"
 #include "bullet.h"
+#include "enemy.h"
 #include "player.h"
+#include "texture_cache.h"
 
 namespace sp9k {
 class Renderer {
@@ -18,6 +19,7 @@ public:
       : window(window), textureCache(textureCache), renderBounds(false) {};
   void render(Player &player);
   void render(std::vector<std::unique_ptr<Bullet>> &bullets);
+  void render(std::vector<Enemy> &enemies);
 };
 
 } // namespace sp9k
