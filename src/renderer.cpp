@@ -29,15 +29,15 @@ void Renderer::render(Player &player) {
   }
 }
 
-void Renderer::render(std::vector<std::unique_ptr<Bullet>> &bullets) {
+void Renderer::render(std::vector<Bullet> &bullets) {
   for (auto &bullet : bullets) {
-    renderSprite(bullet->position, "shot1");
+    renderSprite(bullet.position, "shot1");
 
     if (!renderBounds) {
       continue;
     }
 
-    renderCircle(bullet->position, bullet->radius);
+    renderCircle(bullet.position, bullet.radius);
   }
 }
 

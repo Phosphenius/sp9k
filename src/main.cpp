@@ -1,6 +1,7 @@
 #include "bullet.h"
 #include "config.h"
 #include "enemy.h"
+#include "game.h"
 #include "player.h"
 #include "renderer.h"
 #include "texture_cache.h"
@@ -33,19 +34,16 @@ int main() {
   statsText.setFillColor(sf::Color::White);
   statsText.setPosition(5, 5);
 
+  sp9k::Game game;
+
   sp9k::TextureCache textureCache;
   sp9k::Renderer renderer(window, textureCache);
-  sp9k::Player player(sf::Vector2f(480, 360));
 
 #ifndef NDEBUG
   renderer.renderBounds = true;
 #endif
 
-  std::vector<std::unique_ptr<sp9k::Bullet>> bullets;
-
-  std::vector<sp9k::Enemy> enemies;
-
-  enemies.emplace_back(sf::Vector2f(50, 50), sf::Vector2f(0, 0));
+  game.createEnemy(sf::Vector2f(50, 50), sf::Vector2f(0, 0));
 
   float elapsed_t = 0.f;
 
@@ -60,47 +58,28 @@ int main() {
     elapsed_t += dt;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-      player.accel.x = -1200;
+      game.player.accel.x = -1200;
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-      player.accel.x = 1200;
+      game.player.accel.x = 1200;
     } else {
-      player.accel.x = 0;
+      game.player.accel.x = 0;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-      player.accel.y = -1750;
+      game.player.accel.y = -1750;
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-      player.accel.y = 1000;
+      game.player.accel.y = 1000;
     } else {
-      player.accel.y = 0;
+      game.player.accel.y = 0;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && elapsed_t >= 0.2) {
       elapsed_t = 0.f;
 
-      sf::Vector2f offset1(-12, -50);
-      sf::Vector2f offset2(12, -50);
-
-      bullets.push_back(std::make_unique<sp9k::Bullet>(player.position + offset1,
-                                                       sf::Vector2f(0, -600)));
-
-      bullets.push_back(std::make_unique<sp9k::Bullet>(player.position + offset2,
-                                                       sf::Vector2f(0, -600)));
+      game.createBullets(game.player.position);
     }
 
-    for (size_t i = 0; i < bullets.size(); ++i) {
-      if (bullets[i]->position.y <= -200) {
-        bullets.erase(bullets.begin() + i);
-      }
-    }
-
-    for (auto &bullet : bullets) {
-      bullet->update(dt);
-    }
-
-    for (auto &enemy : enemies) {
-      enemy.update(dt);
-    }
+    game.update(dt);
 
     std::stringstream fps;
     fps << "FPS: " << static_cast<int>(1.f / dt);
@@ -108,20 +87,17 @@ int main() {
 
 #ifndef NDEBUG
     std::stringstream stats;
-    stats << "Pos: " << static_cast<int>(player.position.x) << ", "
-          << static_cast<int>(player.position.y) << std::endl
-          << "Accel: " << player.accel.x << ", " << player.accel.y << std::endl
-          << "Velocity: " << player.velocity.x << ", " << player.velocity.y
-          << std::endl;
+    stats << "Pos: " << static_cast<int>(game.player.position.x) << ", "
+          << static_cast<int>(game.player.position.y) << std::endl
+          << "Accel: " << game.player.accel.x << ", " << game.player.accel.y
+          << std::endl
+          << "Velocity: " << game.player.velocity.x << ", "
+          << game.player.velocity.y << std::endl;
     statsText.setString(stats.str());
 #endif
 
-    player.update(dt);
-
     window.clear();
-    renderer.render(player);
-    renderer.render(bullets);
-    renderer.render(enemies);
+    game.render(renderer);
     window.draw(fpsText);
 #ifndef NDEBUG
     window.draw(statsText);

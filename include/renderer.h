@@ -18,7 +18,7 @@ public:
   Renderer(sf::RenderWindow &window, TextureCache &textureCache)
       : window(window), textureCache(textureCache), renderBounds(false) {};
   void render(Player &player);
-  void render(std::vector<std::unique_ptr<Bullet>> &bullets);
+  void render(std::vector<Bullet> &bullets);
   void render(std::vector<Enemy> &enemies);
 };
 
