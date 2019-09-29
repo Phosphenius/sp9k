@@ -2,8 +2,7 @@
 
 namespace sp9k {
 
-Player::Player(sf::Vector2f position)
-    : Entity(position, {0, 0}, 40), accel(sf::Vector2f(0, 0)) {}
+Player::Player(sf::Vector2f position) : Entity(250, 40, position, sf::Vector2f(0, 0)) {}
 
 void Player::update(float dt) {
   velocity += accel * dt;

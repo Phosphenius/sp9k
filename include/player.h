@@ -10,7 +10,7 @@ class Player : public Entity{
   const float maxVelocity = 450.0f;
 
 public:
-  sf::Vector2f accel;
+  sf::Vector2f accel{0, 0};
 
   Player(sf::Vector2f position);
   void update(float dt);

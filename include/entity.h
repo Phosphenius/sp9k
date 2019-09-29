@@ -5,14 +5,23 @@
 
 namespace sp9k {
 class Entity {
+
+  bool isAlive = true;
+  int hitPoints = 0;
+
 public:
-  sf::Vector2f position;
-  sf::Vector2f velocity;
-  float radius;
-  Entity(sf::Vector2f position = {0, 0}, sf::Vector2f velocity = {0, 0},
-         float radius = 0)
-      : position(position), velocity(velocity), radius(radius){};
+  sf::Vector2f position{0, 0};
+  sf::Vector2f velocity{0, 0};
+  float radius = .0f;
+
+  Entity(int hitPoints, float radius);
+  Entity(int hitPoints, float radius, sf::Vector2f position,
+         sf::Vector2f velocity);
+
   void virtual update(float dt) = 0;
+  bool getIsAlive();
+  int getHitPoints();
+  void takeDamage(int damage);
 };
 } // namespace sp9k
 #endif
