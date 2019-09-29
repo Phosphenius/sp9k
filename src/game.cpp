@@ -27,10 +27,11 @@ void Game::update(float dt) {
 
   player.update(dt);
 
-  // collision check every bullet against every enemy
   for (size_t i = 0; i < enemies.size(); ++i) {
+
+    auto &enemy = enemies[i];
+
     for (size_t j = i; j < bullets.size(); ++j) {
-      auto &enemy = enemies[i];
       auto &bullet = bullets[j];
 
       if (!enemy.collidesWith(bullet)) {
@@ -40,6 +41,13 @@ void Game::update(float dt) {
       enemy.takeDamage(4);
       bullet.takeDamage(1);
     }
+
+    if (!player.collidesWith(enemy)) {
+      continue;
+    }
+
+    player.takeDamage(50);
+    enemy.takeDamage(50);
   }
 }
 
