@@ -22,6 +22,7 @@ public:
   bool getIsAlive();
   int getHitPoints();
   void takeDamage(int damage);
+  bool collidesWith(const Entity &entity);
 };
 } // namespace sp9k
 #endif

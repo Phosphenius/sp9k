@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "math.h"
 #include <cassert>
 
 namespace sp9k {
@@ -30,6 +31,13 @@ void Entity::takeDamage(int damage) {
   if (hitPoints <= 0) {
     isAlive = false;
   }
+}
+
+bool Entity::collidesWith(const Entity &entity) {
+  float radii = this->radius + entity.radius;
+  float dist = distance(this->position, entity.position);
+
+  return dist < radii;
 }
 
 } // namespace sp9k

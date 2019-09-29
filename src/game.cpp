@@ -1,5 +1,4 @@
 #include "game.h"
-#include "math.h"
 
 namespace sp9k {
 Game::Game() : player(sf::Vector2f(480, 360)) {}
@@ -34,10 +33,7 @@ void Game::update(float dt) {
       auto &enemy = enemies[i];
       auto &bullet = bullets[j];
 
-      float radii = bullet.radius + enemy.radius;
-      float dist = distance(bullet.position, enemy.position);
-
-      if (dist > radii) {
+      if (!enemy.collidesWith(bullet)) {
         continue;
       }
 
