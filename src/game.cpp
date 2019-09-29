@@ -1,4 +1,5 @@
 #include "game.h"
+#include "math.h"
 
 namespace sp9k {
 Game::Game() : player(sf::Vector2f(480, 360)) {}
@@ -6,8 +7,14 @@ Game::Game() : player(sf::Vector2f(480, 360)) {}
 void Game::update(float dt) {
 
   for (size_t i = 0; i < bullets.size(); ++i) {
-    if (bullets[i].position.y <= -200) {
+    if (bullets[i].position.y <= -200 || !bullets[i].getIsAlive()) {
       bullets.erase(bullets.begin() + i);
+    }
+  }
+
+  for (size_t i = 0; i < enemies.size(); ++i) {
+    if (!enemies[i].getIsAlive()) {
+      enemies.erase(enemies.begin() + i);
     }
   }
 
@@ -18,8 +25,26 @@ void Game::update(float dt) {
   for (auto &enemy : enemies) {
     enemy.update(dt);
   }
+
   player.update(dt);
 
+  // collision check every bullet against every enemy
+  for (size_t i = 0; i < enemies.size(); ++i) {
+    for (size_t j = i; j < bullets.size(); ++j) {
+      auto &enemy = enemies[i];
+      auto &bullet = bullets[j];
+
+      float radii = bullet.radius + enemy.radius;
+      float dist = distance(bullet.position, enemy.position);
+
+      if (dist > radii) {
+        continue;
+      }
+
+      enemy.takeDamage(4);
+      bullet.takeDamage(1);
+    }
+  }
 }
 
 void Game::render(Renderer &renderer) {
@@ -36,7 +61,7 @@ void Game::createBullets(sf::Vector2f position) {
   bullets.emplace_back(position + offset2, sf::Vector2f(0, -600));
 }
 
-void Game::createEnemy(sf::Vector2f position, sf::Vector2f velocity) { 
+void Game::createEnemy(sf::Vector2f position, sf::Vector2f velocity) {
   enemies.emplace_back(position, velocity);
 }
 
