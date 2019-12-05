@@ -1,6 +1,7 @@
 #include "entity.h"
 #include "math.h"
 #include <cassert>
+#include <iostream>
 
 namespace sp9k {
 
@@ -18,9 +19,9 @@ Entity::Entity(int hitPoints, float radius, sf::Vector2f position,
   this->velocity = velocity;
 }
 
-bool Entity::getIsAlive() { return isAlive; }
+bool Entity::getIsAlive() const { return isAlive; }
 
-int Entity::getHitPoints() { return hitPoints; }
+int Entity::getHitPoints() const { return hitPoints; }
 
 void Entity::takeDamage(int damage) {
   assert(damage > 0);
@@ -33,7 +34,7 @@ void Entity::takeDamage(int damage) {
   }
 }
 
-bool Entity::collidesWith(const Entity &entity) {
+bool Entity::collidesWith(const Entity &entity) const {
   float radii = this->radius + entity.radius;
   float dist = distance(this->position, entity.position);
 

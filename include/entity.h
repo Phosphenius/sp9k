@@ -19,10 +19,10 @@ public:
          sf::Vector2f velocity);
 
   void virtual update(float dt) = 0;
-  bool getIsAlive();
-  int getHitPoints();
+  bool getIsAlive() const;
+  int getHitPoints() const;
   void takeDamage(int damage);
-  bool collidesWith(const Entity &entity);
+  bool collidesWith(const Entity &entity) const;
 };
 } // namespace sp9k
 #endif

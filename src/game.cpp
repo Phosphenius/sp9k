@@ -1,15 +1,16 @@
 #include "game.h"
+#include <iostream>
 
 namespace sp9k {
 Game::Game() : player(sf::Vector2f(480, 360)) {}
 
 void Game::update(float dt) {
-
-  for (size_t i = 0; i < bullets.size(); ++i) {
-    if (bullets[i].position.y <= -200 || !bullets[i].getIsAlive()) {
-      bullets.erase(bullets.begin() + i);
-    }
-  }
+  bullets.erase(std::remove_if(bullets.begin(), bullets.end(),
+                               [](Bullet const &bullet) {
+                                 return bullet.position.y <= -200 ||
+                                        !bullet.getIsAlive();
+                               }),
+                bullets.end());
 
   for (size_t i = 0; i < enemies.size(); ++i) {
     if (!enemies[i].getIsAlive()) {
