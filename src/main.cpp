@@ -24,7 +24,7 @@ int main() {
 
   sf::Font font;
 
-  font.loadFromFile("fonts/Xolonium-Regular.ttf");
+  font.loadFromFile(std::string(SP9K_ASSET_ROOT_PATH).append("/fonts/Xolonium-Regular.ttf"));
 
   sf::Text fpsText;
   fpsText.setFont(font);
