@@ -12,11 +12,10 @@ void Game::update(float dt) {
                                }),
                 bullets.end());
 
-  for (size_t i = 0; i < enemies.size(); ++i) {
-    if (!enemies[i].getIsAlive()) {
-      enemies.erase(enemies.begin() + i);
-    }
-  }
+  enemies.erase(
+      std::remove_if(enemies.begin(), enemies.end(),
+                     [](Enemy const &enemy) { return !enemy.getIsAlive(); }),
+      enemies.end());
 
   for (auto &bullet : bullets) {
     bullet.update(dt);
