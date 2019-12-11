@@ -9,6 +9,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "background.h"
+
 int main() {
   std::stringstream title;
   title << "SFML | SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
@@ -35,7 +37,7 @@ int main() {
   statsText.setPosition(5, 5);
 
   sp9k::Game game;
-
+  sp9k::Background background(420);
   sp9k::TextureCache textureCache;
   sp9k::Renderer renderer(window, textureCache);
 
@@ -80,6 +82,7 @@ int main() {
     }
 
     game.update(dt);
+    background.update(dt);
 
     std::stringstream fps;
     fps << "FPS: " << static_cast<int>(1.f / dt);
@@ -97,6 +100,7 @@ int main() {
 #endif
 
     window.clear();
+    window.draw(background);
     game.render(renderer);
     window.draw(fpsText);
 #ifndef NDEBUG
