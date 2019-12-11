@@ -9,7 +9,7 @@ namespace fs = std::filesystem;
 
 namespace sp9k {
 TextureCache::TextureCache() {
-  fs::path asset_root_path(SP9K_ASSET_ROOT_PATH);
+  fs::path asset_root_path(SP9k_ASSET_ROOT_PATH);
   fs::path gfx_path("gfx");
   for (auto &entry : fs::directory_iterator(asset_root_path / gfx_path)) {
     std::unique_ptr<NCTexture> texture = std::make_unique<NCTexture>();
