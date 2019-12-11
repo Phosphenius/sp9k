@@ -33,4 +33,4 @@ add_executable(sp9k "${game_FILES}")
 target_link_libraries(sp9k sfml-graphics sfml-window)
 
 install(TARGETS sp9k)
-install(DIRECTORY "${PROJECT_SOURCE_DIR}/gfx" "${PROJECT_SOURCE_DIR}/fonts" DESTINATION share/sp9k)
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/gfx" "${PROJECT_SOURCE_DIR}/fonts" DESTINATION share/SP9k)
