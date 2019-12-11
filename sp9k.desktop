@@ -1,0 +1,10 @@
+#!/usr/bin/xdg-open
+[Desktop Entry]
+Name=SP9k
+GenericName=Video Game
+Comment=A bullet hell/space shooter game made in C++ and SFML as a learning project.
+Exec=sp9k
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=Game;ActionGame
