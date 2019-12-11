@@ -1,5 +1,4 @@
 #include "game.h"
-#include <iostream>
 
 namespace sp9k {
 Game::Game() : player(sf::Vector2f(480, 360)) {}
