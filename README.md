@@ -25,3 +25,8 @@ cmake . -DCMAKE_BUILD_TYPE=Release
 make
 ```
 
+## Download
+[AUR VCS](https://aur.archlinux.org/packages/sp9k-git/)
+
+---
+[Repo mirror](https://git.phosphenius.net/luca/sp9k)
