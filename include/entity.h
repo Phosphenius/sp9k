@@ -21,7 +21,7 @@ public:
   void virtual update(float dt) = 0;
   bool getIsAlive() const;
   int getHitPoints() const;
-  void takeDamage(int damage);
+  void takeDamage(unsigned int damage);
   bool collidesWith(const Entity &entity) const;
 };
 } // namespace sp9k

@@ -23,8 +23,7 @@ bool Entity::getIsAlive() const { return isAlive; }
 
 int Entity::getHitPoints() const { return hitPoints; }
 
-void Entity::takeDamage(int damage) {
-  assert(damage > 0);
+void Entity::takeDamage(unsigned int damage) {
   assert(isAlive);
 
   hitPoints -= damage;
