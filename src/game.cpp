@@ -3,7 +3,20 @@
 namespace sp9k {
 Game::Game() : player(sf::Vector2f(480, 360)) {}
 
+float Game::spawnFreqFunc(float elapsed_t) { return 1 / (0.008 * elapsed_t + 0.3f); }
+
 void Game::update(float dt) {
+  elapsed_t += dt;
+  spawn_t += dt;
+
+  if (spawn_t >= spawnFreqFunc(elapsed_t)) {
+    spawn_t = .0f;
+
+    sf::Vector2f pos(dist_x(generator), -20);
+    createEnemy(pos, sf::Vector2f(0, 50));
+  }
+
+  // FIXME: Find better y value after which bullets should be removed
   bullets.erase(std::remove_if(bullets.begin(), bullets.end(),
                                [](Bullet const &bullet) {
                                  return bullet.position.y <= -200 ||

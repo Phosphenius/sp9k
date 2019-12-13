@@ -45,8 +45,6 @@ int main() {
   renderer.renderBounds = true;
 #endif
 
-  game.createEnemy(sf::Vector2f(480, 50), sf::Vector2f(0, 0));
-
   float elapsed_t = 0.f;
 
   while (window.isOpen()) {
