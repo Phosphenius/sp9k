@@ -3,7 +3,9 @@
 namespace sp9k {
 Game::Game() : player(sf::Vector2f(480, 360)) {}
 
-float Game::spawnFreqFunc(float elapsed_t) { return 1 / (0.008 * elapsed_t + 0.3f); }
+float Game::spawnFreqFunc(float elapsed_t) {
+  return 1 / (0.008 * elapsed_t + 0.3f);
+}
 
 void Game::update(float dt) {
   elapsed_t += dt;
