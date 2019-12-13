@@ -43,10 +43,11 @@ void Game::update(float dt) {
 
     auto &enemy = enemies[i];
 
-    for (size_t j = i; j < bullets.size(); ++j) {
+    for (size_t j = 0; j < bullets.size(); ++j) {
       auto &bullet = bullets[j];
 
-      if (!enemy.collidesWith(bullet)) {
+      if (!enemy.collidesWith(bullet) || !enemy.getIsAlive() ||
+          !bullet.getIsAlive()) {
         continue;
       }
 
