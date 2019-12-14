@@ -36,6 +36,13 @@ int main() {
   statsText.setFillColor(sf::Color::White);
   statsText.setPosition(5, 5);
 
+  sf::Sprite healthbar;
+  sp9k::NCTexture healthbar_tex;
+  healthbar_tex.loadFromFile(
+      std::string(SP9k_ASSET_ROOT_PATH).append("/gfx/health_bar.png"));
+  healthbar.setTexture(healthbar_tex);
+  healthbar.setPosition(sf::Vector2f(700, 700));
+
   sp9k::Game game;
   sp9k::Background background(420);
   sp9k::TextureCache textureCache;
@@ -82,6 +89,14 @@ int main() {
     game.update(dt);
     background.update(dt);
 
+    float percent_health = game.player.getHitPoints() / 250.f;
+
+    if (percent_health < 0) {
+      percent_health = 0;
+    }
+
+    healthbar.setTextureRect(sf::IntRect(0, 0, percent_health * 256, 16));
+
     std::stringstream fps;
     fps << "FPS: " << static_cast<int>(1.f / dt);
     fpsText.setString(fps.str());
@@ -99,6 +114,7 @@ int main() {
 
     window.clear();
     window.draw(background);
+    window.draw(healthbar);
     game.render(renderer);
     window.draw(fpsText);
 #ifndef NDEBUG

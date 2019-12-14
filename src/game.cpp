@@ -37,6 +37,11 @@ void Game::update(float dt) {
 
   for (auto &enemy : enemies) {
     enemy.update(dt);
+
+    if (enemy.position.y >= 750) {
+        player.takeDamage(30);
+        enemy.takeDamage(9999);
+    }
   }
 
   player.update(dt);
