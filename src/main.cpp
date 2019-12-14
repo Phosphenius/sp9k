@@ -14,7 +14,7 @@
 int main() {
   std::stringstream title;
   title << "SFML | SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
-        << "." << SP9k_VERSION_PATCH; 
+        << "." << SP9k_VERSION_PATCH;
   std::cout << title.str() << std::endl;
 
   sf::RenderWindow window(sf::VideoMode(960, 720), title.str());
@@ -24,7 +24,8 @@ int main() {
 
   sf::Font font;
 
-  font.loadFromFile(std::string(SP9k_ASSET_ROOT_PATH).append("/fonts/Xolonium-Regular.ttf"));
+  font.loadFromFile(
+      std::string(SP9k_ASSET_ROOT_PATH).append("/fonts/Xolonium-Regular.ttf"));
 
   sf::Text fpsText;
   fpsText.setFont(font);
