@@ -15,7 +15,8 @@ void Game::update(float dt) {
     spawn_t = .0f;
 
     sf::Vector2f pos(dist_x(generator), -20);
-    createEnemy(pos, sf::Vector2f(0, 50));
+    sf::Vector2f velo(0, dist_velo(generator));
+    createEnemy(pos, velo);
   }
 
   // FIXME: Find better y value after which bullets should be removed

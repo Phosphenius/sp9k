@@ -15,6 +15,7 @@ class Game {
   float spawn_t = .0f;
   std::default_random_engine generator;
   std::uniform_int_distribution<int> dist_x{40, 920};
+  std::uniform_int_distribution<int> dist_velo{50, 63};
 
   float spawnFreqFunc(float elapsed_t);
 
