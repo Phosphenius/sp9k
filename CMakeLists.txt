@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.13)
 
 set(CMAKE_CXX_STANDARD 17)
 add_compile_options(-Wall -Wextra -pedantic -Werror)
@@ -32,7 +32,7 @@ find_package(SFML 2.5 COMPONENTS graphics window REQUIRED)
 add_executable(sp9k "${game_FILES}")
 target_link_libraries(sp9k sfml-graphics sfml-window)
 
-install(TARGETS sp9k)
+install(TARGETS sp9k RUNTIME DESTINATION bin)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/gfx" "${PROJECT_SOURCE_DIR}/fonts" DESTINATION share/sp9k)
 install(FILES "${PROJECT_SOURCE_DIR}/sp9k.desktop" DESTINATION share/applications)
 install(FILES "${PROJECT_SOURCE_DIR}/LICENSE" DESTINATION share/licenses/sp9k)
