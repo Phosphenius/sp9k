@@ -7,7 +7,12 @@ float Game::spawnFreqFunc(float elapsed_t) {
   return 1 / (0.008 * elapsed_t + 0.3f);
 }
 
+GameStats Game::getStats() {
+    return stats;
+}
+
 void Game::update(float dt) {
+  stats.time += dt;
   elapsed_t += dt;
   spawn_t += dt;
 
@@ -42,6 +47,7 @@ void Game::update(float dt) {
     if (enemy.position.y >= 750) {
         player.takeDamage(30);
         enemy.takeDamage(9999);
+        stats.enemiesEscaped++;
     }
   }
 
@@ -61,6 +67,11 @@ void Game::update(float dt) {
 
       enemy.takeDamage(4);
       bullet.takeDamage(1);
+      stats.bulletsHit++;
+
+      if (!enemy.getIsAlive()) {
+        stats.enemiesKilled++;
+      }
     }
 
     if (!player.collidesWith(enemy)) {
@@ -69,6 +80,10 @@ void Game::update(float dt) {
 
     player.takeDamage(50);
     enemy.takeDamage(50);
+
+    if (!enemy.getIsAlive()) {
+      stats.enemiesKilled++;
+    }
   }
 }
 
@@ -81,6 +96,7 @@ void Game::render(Renderer &renderer) {
 void Game::createBullets(sf::Vector2f position) {
   sf::Vector2f offset1(-12, -50);
   sf::Vector2f offset2(12, -50);
+  stats.bulletsFired += 2;
 
   bullets.emplace_back(position + offset1, sf::Vector2f(0, -600));
   bullets.emplace_back(position + offset2, sf::Vector2f(0, -600));

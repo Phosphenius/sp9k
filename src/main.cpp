@@ -109,7 +109,13 @@ int main() {
           << "Accel: " << game.player.accel.x << ", " << game.player.accel.y
           << std::endl
           << "Velocity: " << game.player.velocity.x << ", "
-          << game.player.velocity.y << std::endl;
+          << game.player.velocity.y << std::endl
+          << "\nBullets fired: " << game.getStats().bulletsFired << '\n'
+          << "Bullets hit: " << game.getStats().bulletsHit << '\n'
+          << "Enemies killed: " << game.getStats().enemiesKilled << '\n'
+          << "Enemies escaped: " << game.getStats().enemiesEscaped << '\n'
+          << "Time: " << game.getStats().time << '\n'
+          << "Accuracy: " << game.getStats().getAccuracy() << '\n';
     statsText.setString(stats.str());
 #endif
 

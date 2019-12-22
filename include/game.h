@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "renderer.h"
+#include "stats.h"
 #include <random>
 
 namespace sp9k {
@@ -16,6 +17,7 @@ class Game {
   std::default_random_engine generator;
   std::uniform_int_distribution<int> dist_x{40, 920};
   std::uniform_int_distribution<int> dist_velo{50, 63};
+  GameStats stats;
 
   float spawnFreqFunc(float elapsed_t);
 
@@ -23,6 +25,7 @@ public:
   Player player;
 
   Game();
+  GameStats getStats();
   void update(float dt);
   void render(Renderer &renderer);
   void createBullets(sf::Vector2f position);
