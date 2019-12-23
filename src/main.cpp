@@ -1,3 +1,4 @@
+#include "background.h"
 #include "bullet.h"
 #include "config.h"
 #include "enemy.h"
@@ -8,24 +9,33 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
-
-#include "background.h"
+#include <syslog.h>
 
 int main() {
+  // open syslog
+  openlog("sp9k", LOG_PID | LOG_CONS, LOG_USER);
+
   std::stringstream title;
-  title << "SFML | SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
+  title << "SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
         << "." << SP9k_VERSION_PATCH;
   std::cout << title.str() << std::endl;
 
-  sf::RenderWindow window(sf::VideoMode(960, 720), title.str());
+  syslog(LOG_INFO, "Launching %s", title.str().c_str());
+
+  sf::RenderWindow window(sf::VideoMode(960, 720), title.str(),
+                          sf::Style::Titlebar | sf::Style::Close);
   window.setFramerateLimit(60);
   window.setVerticalSyncEnabled(true);
   sf::Clock clock;
 
   sf::Font font;
+  std::string fontPath(SP9k_ASSET_ROOT_PATH);
+  fontPath.append("/fonts/Xolonium-Regular.ttf");
 
-  font.loadFromFile(
-      std::string(SP9k_ASSET_ROOT_PATH).append("/fonts/Xolonium-Regular.ttf"));
+  if (!font.loadFromFile(fontPath)) {
+    syslog(LOG_ERR, "Unable to load font: %s", fontPath.c_str());
+    return EXIT_FAILURE;
+  }
 
   sf::Text fpsText;
   fpsText.setFont(font);
@@ -39,8 +49,14 @@ int main() {
 
   sf::Sprite healthbar;
   sp9k::NCTexture healthbar_tex;
-  healthbar_tex.loadFromFile(
-      std::string(SP9k_ASSET_ROOT_PATH).append("/gfx/health_bar.png"));
+  std::string healthbarPath(SP9k_ASSET_ROOT_PATH);
+  healthbarPath.append("/gfx/health_bar.png");
+
+  if(!healthbar_tex.loadFromFile(healthbarPath)) {
+    syslog(LOG_ERR, "Unable to load texture: %s", healthbarPath.c_str());
+    return EXIT_FAILURE;
+  }
+
   healthbar.setTexture(healthbar_tex);
   healthbar.setPosition(sf::Vector2f(700, 700));
 
@@ -130,5 +146,6 @@ int main() {
     window.display();
   }
 
+  closelog();
   return EXIT_SUCCESS;
 }
