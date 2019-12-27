@@ -61,4 +61,16 @@ void Renderer::render(std::vector<Enemy> &enemies) {
   }
 }
 
+void Renderer::renderText(std::string textStr, sf::Vector2f position,
+                          size_t size) const {
+  sf::Text text;
+  text.setString(textStr);
+  text.setFont(fontCache.getAsset("Xolonium-Regular"));
+  text.setCharacterSize(size);
+  text.setFillColor(sf::Color::White);
+  text.setPosition(position);
+
+  window.draw(text);
+}
+
 } // namespace sp9k

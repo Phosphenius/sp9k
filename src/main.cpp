@@ -28,25 +28,6 @@ int main() {
   window.setVerticalSyncEnabled(true);
   sf::Clock clock;
 
-  sf::Font font;
-  std::string fontPath(SP9k_ASSET_ROOT_PATH);
-  fontPath.append("/fonts/Xolonium-Regular.ttf");
-
-  if (!font.loadFromFile(fontPath)) {
-    syslog(LOG_ERR, "Unable to load font: %s", fontPath.c_str());
-    return EXIT_FAILURE;
-  }
-
-  sf::Text fpsText;
-  fpsText.setFont(font);
-  fpsText.setCharacterSize(12);
-  fpsText.setFillColor(sf::Color::White);
-  fpsText.setPosition(5, 703);
-
-  sf::Text statsText("", font, 12);
-  statsText.setFillColor(sf::Color::White);
-  statsText.setPosition(5, 5);
-
   sf::Sprite healthbar;
   sp9k::NCTexture healthbar_tex;
   std::string healthbarPath(SP9k_ASSET_ROOT_PATH);
@@ -63,7 +44,8 @@ int main() {
   sp9k::Game game;
   sp9k::Background background(420);
   sp9k::AssetCache<sp9k::NCTexture> textureCache("gfx");
-  sp9k::Renderer renderer(window, textureCache);
+  sp9k::AssetCache<sf::Font> fontCache("fonts");
+  sp9k::Renderer renderer(window, textureCache, fontCache);
 
 #ifndef NDEBUG
   renderer.renderBounds = true;
@@ -116,7 +98,7 @@ int main() {
 
     std::stringstream fps;
     fps << "FPS: " << static_cast<int>(1.f / dt);
-    fpsText.setString(fps.str());
+
 
 #ifndef NDEBUG
     std::stringstream stats;
@@ -132,16 +114,15 @@ int main() {
           << "Enemies escaped: " << game.getStats().enemiesEscaped << '\n'
           << "Time: " << game.getStats().time << '\n'
           << "Accuracy: " << game.getStats().getAccuracy() << '\n';
-    statsText.setString(stats.str());
 #endif
 
     window.clear();
     window.draw(background);
     window.draw(healthbar);
+    renderer.renderText(fps.str(), sf::Vector2f(5, 703), 12);
     game.render(renderer);
-    window.draw(fpsText);
 #ifndef NDEBUG
-    window.draw(statsText);
+    renderer.renderText(stats.str(), sf::Vector2f(5, 5), 12);
 #endif
     window.display();
   }
