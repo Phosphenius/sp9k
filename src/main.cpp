@@ -44,7 +44,7 @@ int main() {
   sp9k::Game game;
   sp9k::Background background(420);
   sp9k::AssetCache<sp9k::NCTexture> textureCache("gfx");
-  sp9k::AssetCache<sf::Font> fontCache("fonts");
+  sp9k::AssetCache<sf::Font> fontCache("fonts", {"LICENSE.txt"});
   sp9k::Renderer renderer(window, textureCache, fontCache);
 
 #ifndef NDEBUG

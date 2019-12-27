@@ -8,21 +8,32 @@
 namespace fs = std::filesystem;
 
 namespace sp9k {
-template <typename T> AssetCache<T>::AssetCache(std::string path) {
+template <typename T>
+AssetCache<T>::AssetCache(std::string path,
+                          std::vector<std::string> exludeFiles) {
   // FIXME: Class should not depend on a constant stored in "config.h"
   fs::path asset_root_path(SP9k_ASSET_ROOT_PATH);
   fs::path gfx_path(path);
+
   for (auto &entry : fs::directory_iterator(asset_root_path / gfx_path)) {
+    std::string filename = entry.path().filename();
+
+    if (std::find(exludeFiles.begin(), exludeFiles.end(), filename) !=
+        exludeFiles.end()) {
+      continue;
+    }
+
     std::unique_ptr<T> asset = std::make_unique<T>();
     asset->loadFromFile(entry.path());
 
-    std::string filename = entry.path().filename();
     filename = filename.substr(0, filename.find("."));
+
     assets.insert({filename, std::move(asset)});
   }
 }
 
-template <typename T> const T &AssetCache<T>::getAsset(std::string name) const {
+template <typename T>
+const T &AssetCache<T>::getAsset(const std::string &name) const {
   return *assets.at(name);
 }
 
