@@ -1,3 +1,4 @@
+#include "asset_cache.h"
 #include "background.h"
 #include "bullet.h"
 #include "config.h"
@@ -5,7 +6,6 @@
 #include "game.h"
 #include "player.h"
 #include "renderer.h"
-#include "texture_cache.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
@@ -62,7 +62,7 @@ int main() {
 
   sp9k::Game game;
   sp9k::Background background(420);
-  sp9k::TextureCache textureCache;
+  sp9k::AssetCache<sp9k::NCTexture> textureCache("gfx");
   sp9k::Renderer renderer(window, textureCache);
 
 #ifndef NDEBUG

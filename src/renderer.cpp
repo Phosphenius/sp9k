@@ -4,7 +4,7 @@ namespace sp9k {
 void Renderer::renderSprite(sf::Vector2f pos, std::string texName) {
   sf::Sprite sprite;
 
-  auto &tex = textureCache.getTexture(texName);
+  auto &tex = textureCache.getAsset(texName);
   sprite.setTexture(tex);
   sprite.setPosition(pos);
   sprite.setOrigin(tex.getSize().x / 2, tex.getSize().y / 2);
@@ -46,7 +46,7 @@ void Renderer::render(std::vector<Enemy> &enemies) {
 
     sf::Sprite sprite;
 
-    auto &tex = textureCache.getTexture("ship2");
+    auto &tex = textureCache.getAsset("ship2");
     sprite.setTexture(tex);
     sprite.setPosition(enemy.position);
     sprite.setRotation(180);
