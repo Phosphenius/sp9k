@@ -1,6 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include "animation.h"
 #include "asset_cache.h"
 #include "bullet.h"
 #include "enemy.h"
@@ -22,6 +23,7 @@ public:
   void render(Player &player);
   void render(std::vector<Bullet> &bullets);
   void render(std::vector<Enemy> &enemies);
+  void render(std::vector<Animation> &animations);
   void renderText(std::string textStr, sf::Vector2f position, size_t size = 12) const;
   // TODO: Add renderTextColored()
 };

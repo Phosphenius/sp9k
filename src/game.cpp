@@ -53,6 +53,10 @@ void Game::update(float dt) {
 
   player.update(dt);
 
+  for (auto &explosion: explosions) {
+    explosion.update(dt);
+  }
+
   for (size_t i = 0; i < enemies.size(); ++i) {
 
     auto &enemy = enemies[i];
@@ -71,6 +75,7 @@ void Game::update(float dt) {
 
       if (!enemy.getIsAlive()) {
         stats.enemiesKilled++;
+        createExplosion(enemy.position);
       }
     }
 
@@ -82,6 +87,7 @@ void Game::update(float dt) {
     enemy.takeDamage(50);
 
     if (!enemy.getIsAlive()) {
+      createExplosion(enemy.position);
       stats.enemiesKilled++;
     }
   }
@@ -91,6 +97,7 @@ void Game::render(Renderer &renderer) {
   renderer.render(player);
   renderer.render(bullets);
   renderer.render(enemies);
+  renderer.render(explosions);
 }
 
 void Game::createBullets(sf::Vector2f position) {
@@ -104,6 +111,10 @@ void Game::createBullets(sf::Vector2f position) {
 
 void Game::createEnemy(sf::Vector2f position, sf::Vector2f velocity) {
   enemies.emplace_back(position, velocity);
+}
+
+void Game::createExplosion(sf::Vector2f position) {
+  explosions.emplace_back(position, 15);
 }
 
 } // namespace sp9k

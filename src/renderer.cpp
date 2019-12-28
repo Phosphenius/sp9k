@@ -67,6 +67,21 @@ void Renderer::render(std::vector<Enemy> &enemies) {
   }
 }
 
+void Renderer::render(std::vector<Animation> &animations) {
+  for (auto &animation : animations) {
+    sf::Sprite sprite;
+
+    auto &tex = textureCache.getAsset("explosion");
+    sprite.setTexture(tex);
+    sprite.setTextureRect(sf::IntRect(animation.getCurrentCol() * 64,
+                                      animation.getCurrentRow() * 64, 64, 64));
+    sprite.setPosition(animation.getPosition());
+    sprite.setOrigin(32, 32);
+
+    window.draw(sprite);
+  }
+}
+
 void Renderer::renderText(std::string textStr, sf::Vector2f position,
                           size_t size) const {
   sf::Text text;
