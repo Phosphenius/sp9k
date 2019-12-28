@@ -1,6 +1,12 @@
 #include "renderer.h"
 
 namespace sp9k {
+Renderer::Renderer(sf::RenderWindow &window,
+                   AssetCache<NCTexture> &textureCache,
+                   AssetCache<sf::Font> &fontCache)
+    : window(window), textureCache(textureCache), fontCache(fontCache),
+      renderBounds(false) {}
+
 void Renderer::renderSprite(sf::Vector2f pos, std::string texName) {
   sf::Sprite sprite;
 

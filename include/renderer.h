@@ -18,9 +18,7 @@ class Renderer {
 public:
   bool renderBounds;
   Renderer(sf::RenderWindow &window, AssetCache<NCTexture> &textureCache,
-           AssetCache<sf::Font> &fontCache)
-      : window(window), textureCache(textureCache), fontCache(fontCache),
-        renderBounds(false){};
+           AssetCache<sf::Font> &fontCache);
   void render(Player &player);
   void render(std::vector<Bullet> &bullets);
   void render(std::vector<Enemy> &enemies);
