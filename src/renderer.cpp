@@ -7,12 +7,24 @@ Renderer::Renderer(sf::RenderWindow &window,
     : window(window), textureCache(textureCache), fontCache(fontCache),
       renderBounds(false) {}
 
-void Renderer::renderSprite(sf::Vector2f pos, std::string texName) {
+void Renderer::renderTexture(sf::Vector2f pos, std::string texName) {
   sf::Sprite sprite;
 
   auto &tex = textureCache.getAsset(texName);
   sprite.setTexture(tex);
   sprite.setPosition(pos);
+  sprite.setOrigin(tex.getSize().x / 2, tex.getSize().y / 2);
+
+  window.draw(sprite);
+}
+
+void Renderer::renderTexture(sf::Vector2f pos, std::string texName, sf::IntRect rect){ 
+  sf::Sprite sprite;
+
+  auto &tex = textureCache.getAsset(texName);
+  sprite.setTexture(tex);
+  sprite.setPosition(pos);
+  sprite.setTextureRect(rect);
   sprite.setOrigin(tex.getSize().x / 2, tex.getSize().y / 2);
 
   window.draw(sprite);
@@ -29,7 +41,7 @@ void Renderer::renderCircle(sf::Vector2f pos, float radius) {
 }
 
 void Renderer::render(Player &player) {
-  renderSprite(player.position, "ship1");
+  renderTexture(player.position, "ship1");
   if (renderBounds) {
     renderCircle(player.position, player.radius);
   }
@@ -37,7 +49,7 @@ void Renderer::render(Player &player) {
 
 void Renderer::render(std::vector<Bullet> &bullets) {
   for (auto &bullet : bullets) {
-    renderSprite(bullet.position, "shot1");
+    renderTexture(bullet.position, "shot1");
 
     if (!renderBounds) {
       continue;
