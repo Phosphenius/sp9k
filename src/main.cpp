@@ -8,15 +8,20 @@ int main() {
   // open syslog
   openlog("sp9k", LOG_PID | LOG_CONS, LOG_USER);
 
-  std::stringstream title;
-  title << "SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
+  std::stringstream title_ss;
+  title_ss << "SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
         << "." << SP9k_VERSION_PATCH;
-  std::cout << title.str() << std::endl;
 
-  syslog(LOG_INFO, "Launching %s", title.str().c_str());
+  std::string title = title_ss.str();
 
-  sp9k::Application app(title.str());
+  std::cout << title << '\n';
+
+  syslog(LOG_INFO, "Launching %s", title.c_str());
+
+  sp9k::Application app(title);
   app.run();
+
+  syslog(LOG_INFO, "Terminating %s", title.c_str());
 
   closelog();
   return EXIT_SUCCESS;
