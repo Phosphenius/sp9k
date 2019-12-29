@@ -94,6 +94,9 @@ void Game::update(float dt) {
 }
 
 void Game::render(Renderer &renderer) {
+  renderer.renderTexture(
+      sf::Vector2f(820, 700), "health_bar",
+      sf::IntRect(0, 0, player.getHealthPercentage() * 256, 16));
   renderer.render(player);
   renderer.render(bullets);
   renderer.render(enemies);

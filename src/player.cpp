@@ -2,7 +2,8 @@
 
 namespace sp9k {
 
-Player::Player(sf::Vector2f position) : Entity(250, 40, position, sf::Vector2f(0, 0)) {}
+Player::Player(sf::Vector2f position)
+    : Entity(250, 40, position, sf::Vector2f(0, 0)) {}
 
 void Player::update(float dt) {
   velocity += accel * dt;
@@ -29,6 +30,16 @@ void Player::update(float dt) {
     position.y = 720;
     velocity.y = 0;
   }
+}
+
+float Player::getHealthPercentage() {
+  float percent_health = getHitPoints() / 250.f;
+
+  if (percent_health < 0) {
+    percent_health = 0;
+  }
+
+  return percent_health;
 }
 
 } // namespace sp9k

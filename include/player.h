@@ -14,6 +14,7 @@ public:
 
   Player(sf::Vector2f position);
   void update(float dt);
+  float getHealthPercentage();
 };
 } // namespace sp9k
 #endif

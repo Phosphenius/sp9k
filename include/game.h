@@ -28,6 +28,7 @@ public:
 
   Game();
   GameStats getStats();
+  // TODO: Maybe add processEvent(s) method
   void update(float dt);
   void render(Renderer &renderer);
   void createBullets(sf::Vector2f position);
