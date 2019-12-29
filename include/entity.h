@@ -17,7 +17,7 @@ public:
   Entity(int hitPoints, float radius);
   Entity(int hitPoints, float radius, sf::Vector2f position,
          sf::Vector2f velocity);
-
+  virtual ~Entity() = default;
   void virtual update(float dt) = 0;
   bool getIsAlive() const;
   int getHitPoints() const;
