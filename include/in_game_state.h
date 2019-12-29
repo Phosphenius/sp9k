@@ -10,6 +10,7 @@ class InGameState : public AbstractState {
   float elapsed_t = 0.f;
 
 public:
+  InGameState(StateContext &context);
   void enter();
   void leave();
   void pause();

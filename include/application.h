@@ -20,8 +20,8 @@ class Application {
   sf::Font font;
   Background background;
   int fps = 0.f;
-  InGameState inGameState;
   StateContext stateContext;
+  InGameState inGameState;
 
   void update();
   void render();

@@ -1,4 +1,5 @@
 #include "state_context.h"
+#include "abstract_state.h"
 
 namespace sp9k {
 

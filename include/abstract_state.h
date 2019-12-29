@@ -2,9 +2,13 @@
 #define STATE_H
 
 #include "renderer.h"
+#include "state_context.h"
 
 namespace sp9k {
 class AbstractState {
+protected:
+  StateContext context;
+
 public:
   // TODO: Maybe add processEvent(s) method
   virtual void enter() = 0;

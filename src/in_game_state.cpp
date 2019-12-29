@@ -3,6 +3,9 @@
 #include <syslog.h>
 
 namespace sp9k {
+
+InGameState::InGameState(StateContext &context) { this->context = context; }
+
 void InGameState::enter() {
 #ifndef NDEBUG
   syslog(LOG_DEBUG, "Entering InGameState");

@@ -8,9 +8,11 @@ Application::Application(const std::string &title)
              sf::Style::Titlebar | sf::Style::Close),
       textureCache("gfx"), fontCache("fonts", {"LICENSE.txt"}),
       renderer(window, textureCache, fontCache), background(420),
-      stateContext(&inGameState) {
+      inGameState(stateContext) {
   window.setFramerateLimit(60);
   window.setVerticalSyncEnabled(true);
+
+  stateContext.pushState(&inGameState);
 
 #ifndef NDEBUG
   renderer.renderBounds = true;
