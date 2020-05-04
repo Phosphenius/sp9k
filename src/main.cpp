@@ -1,16 +1,18 @@
 #include "application.h"
-#include "config.h"
 #include <iostream>
 #include <sstream>
 #include <syslog.h>
+
+#ifndef VERSION
+#define VERSION "Unknown version"
+#endif
 
 int main() {
   // open syslog
   openlog("sp9k", LOG_PID | LOG_CONS, LOG_USER);
 
   std::stringstream title_ss;
-  title_ss << "SP9k v" << SP9k_VERSION_MAJOR << "." << SP9k_VERSION_MINOR
-        << "." << SP9k_VERSION_PATCH;
+  title_ss << "SP9k " << VERSION;
 
   std::string title = title_ss.str();
 

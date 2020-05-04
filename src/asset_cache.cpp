@@ -1,9 +1,12 @@
 // Loads assets from disk and holds them in memory
 
 #include "asset_cache.h"
-#include "config.h"
 #include "nc_texture.h"
 #include <filesystem>
+
+#ifndef ASSETDIR
+#define ASSETDIR "./"
+#endif
 
 namespace fs = std::filesystem;
 
@@ -11,8 +14,7 @@ namespace sp9k {
 template <typename T>
 AssetCache<T>::AssetCache(std::string path,
                           std::vector<std::string> exludeFiles) {
-  // FIXME: Class should not depend on a constant stored in "config.h"
-  fs::path asset_root_path(SP9k_ASSET_ROOT_PATH);
+  fs::path asset_root_path(ASSETDIR);
   fs::path gfx_path(path);
 
   for (auto &entry : fs::directory_iterator(asset_root_path / gfx_path)) {

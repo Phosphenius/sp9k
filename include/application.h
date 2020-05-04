@@ -1,6 +1,5 @@
 #include "asset_cache.h"
 #include "background.h"
-#include "config.h"
 #include "game.h"
 #include "in_game_state.h"
 #include "renderer.h"
