@@ -11,18 +11,12 @@ The goal is to learn C++ and SFML while also making a finished, playable game. T
  
 ## Requirements
  - SFML 2.5
- - C++17 compiler (only GCC >= 9.1 tested)
-
-## Build
-```sh
-cmake .
-make
-```
+ - GCC >= 9.1 (older versions not tested, but they should still work as long they support c++17)
 
 ## Build for release
+Removes all the debug info.
 ```sh
-cmake . -DCMAKE_BUILD_TYPE=Release
-make
+make release
 ```
 
 ## Download
