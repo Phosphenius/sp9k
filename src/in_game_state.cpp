@@ -75,7 +75,7 @@ void InGameState::render(Renderer renderer) {
         << "Enemies escaped: " << game.getStats().enemiesEscaped << '\n'
         << "Time: " << game.getStats().time << '\n'
         << "Accuracy: " << game.getStats().getAccuracy() << '\n';
-  renderer.renderText(stats.str(), sf::Vector2f(5, 5), 12);
+  renderer.renderText(stats.str(), sf::Vector2f(5, 25), 12);
 #endif
 }
 } // namespace sp9k

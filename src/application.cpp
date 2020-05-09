@@ -41,7 +41,7 @@ void Application::render() {
     (*state)->render(renderer);
   }
 
-  renderer.renderText(fpsStr.str(), sf::Vector2f(5, 703), 12);
+  renderer.renderText(fpsStr.str(), sf::Vector2f(5, 5), 12);
   window.display();
 }
 
