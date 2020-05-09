@@ -33,7 +33,6 @@ sp9k : $(OBJ)
 	$(CXX) $(LDFLAGS) -o sp9k $(OBJ) $(LOADLIBES) $(LDLIBS)
 
 release : CXXFLAGS += -O3 -DNDEBUG
-release : ASSETDIR = $(DESTDIR)$(PREFIX)/share/sp9k/
 release : sp9k
 
 debug : CXXFLAGS += -Og -ggdb
