@@ -19,6 +19,11 @@ Removes all the debug info.
 make release
 ```
 
+## Watch the log
+```sh
+journalctl -f $(realpath sp9k)
+```
+
 ## Download
 [AUR VCS](https://aur.archlinux.org/packages/sp9k-git/)
 
