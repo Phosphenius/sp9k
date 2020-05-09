@@ -1,7 +1,6 @@
 #include "asset_cache.h"
 #include "background.h"
 #include "game.h"
-#include "in_game_state.h"
 #include "renderer.h"
 #include "state_context.h"
 #include <SFML/Graphics.hpp>
@@ -20,7 +19,6 @@ class Application {
   Background background;
   int fps = 0.f;
   StateContext stateContext;
-  InGameState inGameState;
 
   void update();
   void render();

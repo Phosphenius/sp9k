@@ -4,7 +4,8 @@
 
 namespace sp9k {
 
-InGameState::InGameState(StateContext &context) { this->context = context; }
+InGameState::InGameState(StateContext &context)
+    : AbstractState::AbstractState(context) {}
 
 void InGameState::enter() {
 #ifndef NDEBUG

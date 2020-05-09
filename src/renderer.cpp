@@ -94,6 +94,7 @@ void Renderer::render(std::vector<Animation> &animations) {
   }
 }
 
+// FIXME: Make position the first argument
 void Renderer::renderText(std::string textStr, sf::Vector2f position,
                           size_t size) const {
   sf::Text text;
@@ -105,5 +106,7 @@ void Renderer::renderText(std::string textStr, sf::Vector2f position,
 
   window.draw(text);
 }
+
+// TODO: Add renderTextCentered function
 
 } // namespace sp9k

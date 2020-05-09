@@ -7,16 +7,15 @@ Application::Application(const std::string &title)
     : window(sf::VideoMode(960, 720), title,
              sf::Style::Titlebar | sf::Style::Close),
       textureCache("gfx"), fontCache("fonts", {"LICENSE.txt"}),
-      renderer(window, textureCache, fontCache), background(420),
-      inGameState(stateContext) {
+      renderer(window, textureCache, fontCache), background(420) {
   window.setFramerateLimit(60);
   window.setVerticalSyncEnabled(true);
-
-  stateContext.pushState(&inGameState);
 
 #ifndef NDEBUG
   renderer.renderBounds = true;
 #endif
+
+  stateContext.pushState(stateContext.getMenuState());
 }
 
 void Application::update() {
