@@ -3,10 +3,6 @@
 #include <sstream>
 #include <syslog.h>
 
-#ifndef VERSION
-#define VERSION "Unknown version"
-#endif
-
 int main() {
   // open syslog
   openlog("sp9k", LOG_PID | LOG_CONS, LOG_USER);

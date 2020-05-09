@@ -8,6 +8,10 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#ifndef VERSION
+#define VERSION "Unknown version"
+#endif
+
 namespace sp9k {
 class Application {
   sf::RenderWindow window;
