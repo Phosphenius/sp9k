@@ -1,4 +1,5 @@
 #include "player.h"
+#include <cmath>
 
 namespace sp9k {
 
@@ -9,8 +10,16 @@ const float Player::maxVelocity;
 
 void Player::update(float dt) {
   velocity += accel * dt;
-  // FIXME probably not frame rate independent
-  velocity *= (0.965f + dt); // "friction"
+
+  sf::Vector2f friction = -velocity;
+
+  if (std::fpclassify(friction.x) != FP_ZERO ||
+      std::fpclassify(friction.y) != FP_ZERO) {
+    auto frictionLen = std::hypot(friction.x, friction.y);
+    friction = sf::Vector2f(friction.x / frictionLen, friction.y / frictionLen);
+
+    velocity += friction * 300.0f * dt;
+  }
 
   velocity.x = std::clamp(velocity.x, -maxVelocity, maxVelocity);
   velocity.y = std::clamp(velocity.y, -maxVelocity, maxVelocity);
