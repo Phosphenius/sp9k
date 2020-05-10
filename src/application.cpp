@@ -44,6 +44,10 @@ void Application::render() {
   renderer.renderText(fpsStr.str(), sf::Vector2f(5, 5), 12);
   renderer.renderText(VERSION, sf::Vector2f(5, 703), 12);
   window.display();
+
+  if (stateContext.closeFlag) {
+    window.close();
+  }
 }
 
 void Application::run() {

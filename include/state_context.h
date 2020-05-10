@@ -1,10 +1,11 @@
-#ifndef STATE_MACHINE_H
-#define STATE_MACHINE_H
+#ifndef STATE_CONTEXT_H
+#define STATE_CONTEXT_H
 
-#include <abstract_state.h>
-#include <in_game_state.h>
+#include "abstract_state.h"
+#include "game_over_state.h"
+#include "in_game_state.h"
+#include "menu_state.h"
 #include <memory>
-#include <menu_state.h>
 #include <optional>
 #include <stack>
 
@@ -14,8 +15,10 @@ class StateContext {
   std::stack<AbstractState *> stack;
   std::unique_ptr<MenuState> menuState;
   std::unique_ptr<InGameState> gameState;
+  std::unique_ptr<GameOverState> gameOverState;
 
 public:
+  bool closeFlag = false;
   StateContext();
   StateContext(const StateContext &) = delete;
   void pushState(AbstractState *new_state);
@@ -23,6 +26,7 @@ public:
   std::optional<AbstractState *> getCurrentState();
   AbstractState *getMenuState();
   AbstractState *getInGameState();
+  AbstractState *getGameOverState();
 };
 } // namespace sp9k
 

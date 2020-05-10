@@ -1,4 +1,5 @@
 #include "in_game_state.h"
+#include "state_context.h"
 #include <sstream>
 #include <syslog.h>
 
@@ -14,6 +15,7 @@ void InGameState::enter() {
 }
 
 void InGameState::leave() {
+  game = Game();
 #ifndef NDEBUG
   syslog(LOG_DEBUG, "Leaving InGameState");
 #endif
@@ -55,6 +57,10 @@ void InGameState::update(float dt) {
     elapsed_t = 0.f;
 
     game.createBullets(game.player.position);
+  }
+
+  if (!game.player.getIsAlive()) {
+    context.pushState(context.getGameOverState());
   }
 }
 
