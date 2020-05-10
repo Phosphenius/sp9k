@@ -5,6 +5,8 @@ namespace sp9k {
 Player::Player(sf::Vector2f position)
     : Entity(250, 40, position, sf::Vector2f(0, 0)) {}
 
+const float Player::maxVelocity;
+
 void Player::update(float dt) {
   velocity += accel * dt;
   // FIXME probably not frame rate independent
