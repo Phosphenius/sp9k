@@ -104,12 +104,17 @@ void Game::render(Renderer &renderer) {
 }
 
 void Game::createBullets(sf::Vector2f position) {
+  int numAddEmitterPairs = 0; // number of additional bullets fired
+  int drift = 100;            // horizontal speed of additional bullets
+
   sf::Vector2f offset1(-12, -50);
   sf::Vector2f offset2(12, -50);
-  stats.bulletsFired += 2;
 
-  bullets.emplace_back(position + offset1, sf::Vector2f(0, -600));
-  bullets.emplace_back(position + offset2, sf::Vector2f(0, -600));
+  for (int i = 0; i < numAddEmitterPairs + 1; ++i) {
+    bullets.emplace_back(position + offset1, sf::Vector2f(i * drift, -600));
+    bullets.emplace_back(position + offset2, sf::Vector2f(i * -drift, -600));
+    stats.bulletsFired += 2;
+  }
 }
 
 void Game::createEnemy(sf::Vector2f position, sf::Vector2f velocity) {
