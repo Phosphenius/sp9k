@@ -27,7 +27,7 @@ BINDIR ?= /bin
 .PHONY: clean install uninstall install-bin uninstall-bin install-doc \
 		uninstall-doc install-license uninstall-license install-launcher \
 		uninstall-launcher install-man uninstall-man install-% \
-		uninstall-assets release debug
+		uninstall-assets release debug log
 
 sp9k : $(OBJ)
 	$(CXX) $(LDFLAGS) -o sp9k $(OBJ) $(LOADLIBES) $(LDLIBS)
@@ -90,6 +90,9 @@ uninstall-assets:
 
 uninstall-launcher:
 	rm -f $(DESTDIR)$(PREFIX)/share/applications/sp9k.desktop
+
+log:
+	journalctl -fq $(realpath sp9k)
 
 clean :
 	-rm sp9k sp9k.1.gz $(OBJ) $(DEP)
