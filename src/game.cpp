@@ -104,8 +104,13 @@ void Game::render(Renderer &renderer) {
 }
 
 void Game::createBullets(sf::Vector2f position) {
-  int numAddEmitterPairs = 0; // number of additional bullets fired
+  int numAddEmitterPairs = 3; // number of additional bullets fired
   int drift = 100;            // horizontal speed of additional bullets
+
+  if (stats.enemiesKilled < 233) {
+    numAddEmitterPairs =
+        static_cast<int>(-1.0f / 18000 * pow(233 - stats.enemiesKilled, 2) + 3);
+  }
 
   sf::Vector2f offset1(-12, -50);
   sf::Vector2f offset2(12, -50);
