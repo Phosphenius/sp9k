@@ -1,5 +1,5 @@
 # TODO: Place o and d files in dedicated dirs
-VERSION ?= $(shell git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g')
+VERSION ?= $(shell git describe --tags --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/\(.*\)-/\1./')
 ASSETDIR ?= $(shell pwd)
 
 CXXFLAGS += -Wall -Werror -pedantic -Wextra -std=c++17 -Wduplicated-cond \
@@ -33,6 +33,7 @@ sp9k : $(OBJ)
 	$(CXX) $(LDFLAGS) -o sp9k $(OBJ) $(LOADLIBES) $(LDLIBS)
 
 release : CXXFLAGS += -O3 -DNDEBUG
+release: VERSION = $(shell git describe --tags 2> /dev/null)
 release : sp9k
 
 debug : CXXFLAGS += -Og -ggdb
