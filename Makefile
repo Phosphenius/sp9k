@@ -78,6 +78,7 @@ install-doc: README.md
 install-metainfo: net.phosphenius.sp9k.metainfo.xml
 # metainfo files must be located in /usr/share/metainfo
 ifeq ($(PREFIX), /usr)
+	install -d $(DESTDIR)$(PREFIX)/share/metainfo/
 	install -m 644 $< $(DESTDIR)$(PREFIX)/share/metainfo/
 else
 	@echo "Omitting installation of metainfo"
