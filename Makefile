@@ -43,7 +43,7 @@ debug : sp9k
 
 validate:
 	desktop-file-validate net.phosphenius.sp9k.desktop
-	appstream-util validate net.phosphenius.sp9k.metainfo.xml
+	appstreamcli validate net.phosphenius.sp9k.metainfo.xml
 
 install : install-bin install-gfx install-fonts install-license install-man \
 		install-doc install-launcher install-metainfo
