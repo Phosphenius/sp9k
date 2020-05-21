@@ -33,6 +33,10 @@
     <url type="homepage">https://github.com/Phosphenius/sp9k</url>
     <url type="bugtracker">https://github.com/Phosphenius/sp9k/issues</url>
 
+    <releases>
+        <release version="0.1.0" date="2020-05-21" type="development" />
+    </releases>
+
     <launchable type="desktop-id">net.phosphenius.sp9k.desktop</launchable>
 
     <content_rating type="oars-1.0">
