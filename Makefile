@@ -10,8 +10,8 @@ LDLIBS += -lsfml-graphics -lsfml-window -lsfml-system
 CPPFLAGS += -I include -MMD -MP
 
 ifeq ($(VERSION),)
-		VERSION := $(shell printf "r%s.%s" "$$(git rev-list --count HEAD)" \
-				"$$(git rev-parse --short HEAD)")
+		VERSION := $(shell printf "r%s.%s" "$$(git rev-list --count HEAD 2>/dev/null)" \
+				"$$(git rev-parse --short HEAD 2>/dev/null)")
 endif
 
 SRC := $(wildcard src/*.cpp)
