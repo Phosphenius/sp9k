@@ -7,4 +7,4 @@ Exec=sp9k
 Terminal=false
 Type=Application
 StartupNotify=false
-Categories=Game;ActionGame
+Categories=Game;ActionGame;Shooter

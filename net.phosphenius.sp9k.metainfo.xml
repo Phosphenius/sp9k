@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2020 Luca Kredel aka Phosphenius -->
+
+<component type="desktop">
+    <id>net.phosphenius.sp9k</id>
+
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>MIT</project_license>
+
+    <name>SP9k</name>
+    <summary>Provides a space shooter Game</summary>
+    <description>
+        <p>
+                A bullet hell/space shooter game made in C++ and SFML as a learning project.
+        </p>
+        <p>
+                The goal is to learn C++ and SFML while also making a finished, playable game. To make this goal achievable, only a very small set of features will be implemented:
+        </p>
+        <ul>
+            <li>Only one type of player, enemy bullet/weapon, level/stage and boss</li>
+            <li>A very limited UI/menu</li>
+            <li>Possibly simple particle effects</li>
+            <li>Sound effects and music</li>
+        </ul>
+    </description>
+
+    <provides>
+        <binary>sp9k</binary>
+    </provides>
+
+    <developer_name>Luca Kredel aka Phosphenius</developer_name>
+
+    <url type="homepage">https://github.com/Phosphenius/sp9k</url>
+    <url type="bugtracker">https://github.com/Phosphenius/sp9k/issues</url>
+
+    <launchable type="desktop-id">net.phosphenius.sp9k.desktop</launchable>
+
+    <content_rating type="oars-1.0">
+        <content_attribute id="violence-fantasy">mild</content_attribute>
+    </content_rating>
+</component>

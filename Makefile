@@ -27,7 +27,7 @@ BINDIR ?= /bin
 .PHONY: clean install uninstall install-bin uninstall-bin install-doc \
 		uninstall-doc install-license uninstall-license install-launcher \
 		uninstall-launcher install-man uninstall-man install-% \
-		uninstall-assets release debug log
+		uninstall-assets release debug log install-metainfo uninstall-metainfo validate
 
 sp9k : $(OBJ)
 	$(CXX) $(LDFLAGS) -o sp9k $(OBJ) $(LOADLIBES) $(LDLIBS)
@@ -41,8 +41,12 @@ debug : sp9k
 
 -include $(DEP)
 
+validate:
+	desktop-file-validate net.phosphenius.sp9k.desktop
+	appstream-util validate net.phosphenius.sp9k.metainfo.xml
+
 install : install-bin install-gfx install-fonts install-license install-man \
-		install-doc install-launcher
+		install-doc install-launcher install-metainfo
 
 install-bin: sp9k
 	install -d $(DESTDIR)$(PREFIX)$(BINDIR)/
@@ -63,7 +67,7 @@ install-man: sp9k.1.gz
 sp9k.1.gz : sp9k.1
 	gzip -f -k $<
 
-install-launcher: sp9k.desktop
+install-launcher: net.phosphenius.sp9k.desktop
 	install -d $(DESTDIR)$(PREFIX)/share/applications/
 	install -m 644 $< $(DESTDIR)$(PREFIX)/share/applications/
 
@@ -71,8 +75,16 @@ install-doc: README.md
 	install -d $(DESTDIR)$(PREFIX)/share/doc/sp9k/
 	install -m 644 $< $(DESTDIR)$(PREFIX)/share/doc/sp9k/
 
+install-metainfo: net.phosphenius.sp9k.metainfo.xml
+# metainfo files must be located in /usr/share/metainfo
+ifeq ($(PREFIX), /usr)
+	install -m 644 $< $(DESTDIR)$(PREFIX)/share/metainfo/
+else
+	@echo "Omitting installation of metainfo"
+endif
+
 uninstall : uninstall-bin uninstall-man uninstall-doc uninstall-assets \
-		uninstall-launcher uninstall-license
+		uninstall-launcher uninstall-license uninstall-metainfo
 
 uninstall-bin :
 	rm -f $(DESTDIR)$(PREFIX)$(BINDIR)/sp9k
@@ -90,7 +102,12 @@ uninstall-assets:
 	rm -rf $(DESTDIR)$(PREFIX)/share/sp9k/
 
 uninstall-launcher:
-	rm -f $(DESTDIR)$(PREFIX)/share/applications/sp9k.desktop
+	rm -f $(DESTDIR)$(PREFIX)/share/applications/net.phosphenius.sp9k.desktop
+
+uninstall-metainfo:
+ifeq ($(PREFIX), /usr)
+	rm -f $(DESTDIR)$(PREFIX)/share/metainfo/net.phosphenius.sp9k.metainfo.xml
+endif
 
 log:
 	journalctl -fq $(realpath sp9k)
