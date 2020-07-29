@@ -1,4 +1,5 @@
-// Non-copyable texture to make sure we really don't copy any textures by accident
+// Non-copyable texture to make sure we really don't copy any textures by
+// accident
 
 #ifndef NC_TEXTURE_H
 #define NC_TEXTURE_H

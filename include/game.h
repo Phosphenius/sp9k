@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "animation.h"
 #include "bullet.h"
 #include "enemy.h"
-#include "animation.h"
 #include "player.h"
 #include "renderer.h"
 #include "stats.h"

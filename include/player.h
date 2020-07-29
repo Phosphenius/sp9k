@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 namespace sp9k {
-class Player : public Entity{
+class Player : public Entity {
   static constexpr float maxVelocity = 450.0f;
 
 public:

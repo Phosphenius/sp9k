@@ -23,7 +23,8 @@ public:
   void render(std::vector<Bullet> &bullets);
   void render(std::vector<Enemy> &enemies);
   void render(std::vector<Animation> &animations);
-  void renderText(std::string textStr, sf::Vector2f position, size_t size = 12) const;
+  void renderText(std::string textStr, sf::Vector2f position,
+                  size_t size = 12) const;
   void renderTexture(sf::Vector2f pos, std::string texName);
   void renderTexture(sf::Vector2f pos, std::string texName, sf::IntRect rect);
   // TODO: Add renderTextColored()

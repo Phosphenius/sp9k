@@ -7,9 +7,7 @@ float Game::spawnFreqFunc(float elapsed_t) {
   return 1 / (0.008 * elapsed_t + 0.3f);
 }
 
-GameStats Game::getStats() {
-    return stats;
-}
+GameStats Game::getStats() { return stats; }
 
 void Game::update(float dt) {
   stats.time += dt;
@@ -45,15 +43,15 @@ void Game::update(float dt) {
     enemy.update(dt);
 
     if (enemy.position.y >= 750) {
-        player.takeDamage(30);
-        enemy.takeDamage(9999);
-        stats.enemiesEscaped++;
+      player.takeDamage(30);
+      enemy.takeDamage(9999);
+      stats.enemiesEscaped++;
     }
   }
 
   player.update(dt);
 
-  for (auto &explosion: explosions) {
+  for (auto &explosion : explosions) {
     explosion.update(dt);
   }
 

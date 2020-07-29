@@ -29,15 +29,15 @@ BINDIR ?= /bin
 		uninstall-launcher install-man uninstall-man install-% \
 		uninstall-assets release debug log install-metainfo uninstall-metainfo validate
 
-sp9k : $(OBJ)
+sp9k: $(OBJ)
 	$(CXX) $(LDFLAGS) -o sp9k $(OBJ) $(LOADLIBES) $(LDLIBS)
 
-release : CXXFLAGS += -O3 -DNDEBUG
+release: CXXFLAGS += -O3 -DNDEBUG
 release: VERSION = $(shell git describe --tags 2> /dev/null)
-release : sp9k
+release: sp9k
 
-debug : CXXFLAGS += -Og -ggdb
-debug : sp9k
+debug: CXXFLAGS += -Og -ggdb
+debug: sp9k
 
 -include $(DEP)
 
@@ -45,7 +45,7 @@ validate:
 	desktop-file-validate net.phosphenius.sp9k.desktop
 	appstreamcli validate net.phosphenius.sp9k.metainfo.xml
 
-install : install-bin install-gfx install-fonts install-license install-man \
+install: install-bin install-gfx install-fonts install-license install-man \
 		install-doc install-launcher install-metainfo
 
 install-bin: sp9k
@@ -64,7 +64,7 @@ install-man: sp9k.1.gz
 	install -d $(DESTDIR)$(PREFIX)/share/man/man1/
 	install -m 644 $< $(DESTDIR)$(PREFIX)/share/man/man1/
 
-sp9k.1.gz : sp9k.1
+sp9k.1.gz: sp9k.1
 	gzip -f -k $<
 
 install-launcher: net.phosphenius.sp9k.desktop
@@ -84,10 +84,10 @@ else
 	@echo "Omitting installation of metainfo"
 endif
 
-uninstall : uninstall-bin uninstall-man uninstall-doc uninstall-assets \
+uninstall: uninstall-bin uninstall-man uninstall-doc uninstall-assets \
 		uninstall-launcher uninstall-license uninstall-metainfo
 
-uninstall-bin :
+uninstall-bin:
 	rm -f $(DESTDIR)$(PREFIX)$(BINDIR)/sp9k
 
 uninstall-man:
@@ -113,5 +113,5 @@ endif
 log:
 	journalctl -fq $(realpath sp9k)
 
-clean :
+clean:
 	-rm sp9k sp9k.1.gz $(OBJ) $(DEP)

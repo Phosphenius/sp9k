@@ -37,7 +37,7 @@ void GameOverState::update([[maybe_unused]] float dt) {
     context.popState(); // remove current in game state
     context.pushState(context.getInGameState());
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-      context.closeFlag = true;
+    context.closeFlag = true;
   }
 }
 

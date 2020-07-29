@@ -18,7 +18,8 @@ void Renderer::renderTexture(sf::Vector2f pos, std::string texName) {
   window.draw(sprite);
 }
 
-void Renderer::renderTexture(sf::Vector2f pos, std::string texName, sf::IntRect rect){ 
+void Renderer::renderTexture(sf::Vector2f pos, std::string texName,
+                             sf::IntRect rect) {
   sf::Sprite sprite;
 
   auto &tex = textureCache.getAsset(texName);
