@@ -37,6 +37,7 @@ release: VERSION = $(shell git describe --tags 2> /dev/null)
 release: sp9k
 
 debug: CXXFLAGS += -Og -ggdb
+debug: VERSION := $(VERSION)+debug
 debug: sp9k
 
 -include $(DEP)
