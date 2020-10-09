@@ -13,17 +13,6 @@ The goal is to learn C++ and SFML while also making a finished, playable game. T
  - SFML 2.5
  - GCC >= 9.1 (older versions not tested, but they should still work as long they support c++17)
 
-## Build for release
-Removes all the debug info.
-```sh
-make release
-```
-
-## Watch the log
-```sh
-journalctl -f $(realpath sp9k)
-```
-
 ## Download
 [AUR VCS](https://aur.archlinux.org/packages/sp9k-git/)
 
