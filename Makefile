@@ -2,10 +2,9 @@
 VERSION ?= $(shell git describe --tags --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/\(.*\)-/\1./')
 ASSETDIR ?= $(shell pwd)
 
-CXXFLAGS += -Wall -Werror -pedantic -Wextra -std=c++17 -Wduplicated-cond \
-						-Wduplicated-branches -Wlogical-op -Wnull-dereference \
-						-Wold-style-cast -Wuseless-cast -DVERSION=\"$(VERSION)\" \
-						-DASSETDIR=\"$(ASSETDIR)\" -g # -Wshadow
+CXXFLAGS += -Wall -Werror -pedantic -Wextra -std=c++17 -g \
+						-Wnull-dereference -Wold-style-cast -DVERSION=\"$(VERSION)\" \
+						-DASSETDIR=\"$(ASSETDIR)\"  
 LDLIBS += -lsfml-graphics -lsfml-window -lsfml-system
 CPPFLAGS += -I include -MMD -MP
 
