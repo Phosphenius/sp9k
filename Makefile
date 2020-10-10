@@ -1,10 +1,11 @@
 # TODO: Place o and d files in dedicated dirs
 VERSION ?= $(shell git describe --tags --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/\(.*\)-/\1./')
+BUILDMETA ?= +debug
 ASSETDIR ?= $(shell pwd)
 
-CXXFLAGS += -Wall -Werror -pedantic -Wextra -std=c++17 -g \
-						-Wnull-dereference -Wold-style-cast -DVERSION=\"$(VERSION)\" \
-						-DASSETDIR=\"$(ASSETDIR)\"  
+CXXFLAGS += -Wall -Werror -pedantic -Wextra -std=c++17 -g -Og \
+						-Wnull-dereference -Wold-style-cast \
+						-DVERSION=\"$(VERSION)$(BUILDMETA)\" -DASSETDIR=\"$(ASSETDIR)\"  
 LDLIBS += -lsfml-graphics -lsfml-window -lsfml-system
 CPPFLAGS += -I include -MMD -MP
 
@@ -32,12 +33,8 @@ sp9k: $(OBJ)
 	$(CXX) $(LDFLAGS) -o sp9k $(OBJ) $(LOADLIBES) $(LDLIBS)
 
 release: CXXFLAGS += -O3 -DNDEBUG
-release: VERSION = $(shell git describe --tags 2> /dev/null)
+release: BUILDMETA = 
 release: sp9k
-
-debug: CXXFLAGS += -Og -ggdb
-debug: VERSION := $(VERSION)+debug
-debug: sp9k
 
 -include $(DEP)
 
