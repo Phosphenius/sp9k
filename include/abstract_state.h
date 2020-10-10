@@ -16,6 +16,7 @@ public:
   // TODO: Maybe add processEvent(s) method
   AbstractState(StateContext &context) : context(context){};
   AbstractState(const AbstractState &) = delete;
+  virtual ~AbstractState() = default;
   virtual void enter() = 0;
   virtual void leave() = 0;
   virtual void pause() = 0;
