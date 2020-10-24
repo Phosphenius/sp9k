@@ -1,0 +1,47 @@
+{
+    "app-id": "net.phosphenius.SP9k",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "19.08",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "sp9k",
+    "finish-args":
+    [
+        "--socket=wayland",
+        "--socket=x11",
+        "--share=ipc",
+        "--socket=pulseaudio",
+        "--device=all"
+    ],
+    "modules": [
+        {
+            "name": "sfml",
+            "buildsystem": "simple",
+            "build-commands": [
+                "cp -r include /app/include",
+                "cp -r lib/ /app/lib"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/SFML/SFML/releases/download/2.5.1/SFML-2.5.1-linux-gcc-64-bit.tar.gz",
+                    "sha256": "34ad106e4592d2ec03245db5e8ad8fbf85c256d6ef9e337e8cf5c4345dc583dd"
+                }
+            ]
+        },
+        {
+            "name": "sp9k",
+            "buildsystem": "simple",
+            "build-commands": [
+                "make ASSETDIR=/app/share/sp9k release",
+                "make install PREFIX=/app"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/Phosphenius/sp9k",
+                    "commit": "0.1.1"
+                }
+            ]
+        }
+    ]
+}
