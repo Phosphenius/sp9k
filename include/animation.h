@@ -1,5 +1,4 @@
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -24,5 +23,3 @@ public:
   int getCurrentCol();
 };
 } // namespace sp9k
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef GAME_OVER_STATE_H
-#define GAME_OVER_STATE_H
+#pragma once
 
 #include "abstract_state.h"
 
@@ -18,4 +17,3 @@ public:
 };
 
 } // namespace sp9k
-#endif

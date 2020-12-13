@@ -1,5 +1,4 @@
-#ifndef BACKGROUND_H
-#define BACKGROUND_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <random>
@@ -23,5 +22,3 @@ public:
 };
 
 } // namespace sp9k
-
-#endif

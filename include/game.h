@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "animation.h"
 #include "bullet.h"
@@ -36,4 +35,3 @@ public:
   void createExplosion(sf::Vector2f position);
 };
 } // namespace sp9k
-#endif

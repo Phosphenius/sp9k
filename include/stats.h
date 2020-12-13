@@ -1,5 +1,4 @@
-#ifndef STATS_H
-#define STATS_H
+#pragma once
 
 namespace sp9k {
 struct GameStats {
@@ -11,4 +10,3 @@ struct GameStats {
   float getAccuracy();
 };
 } // namespace sp9k
-#endif

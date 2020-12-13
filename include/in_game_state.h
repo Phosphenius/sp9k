@@ -1,5 +1,4 @@
-#ifndef IN_GAME_STATE_H
-#define IN_GAME_STATE_H
+#pragma once
 
 #include "abstract_state.h"
 #include "game.h"
@@ -19,4 +18,3 @@ public:
   void render(Renderer renderer);
 };
 } // namespace sp9k
-#endif

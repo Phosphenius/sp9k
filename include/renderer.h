@@ -1,5 +1,4 @@
-#ifndef RENDERER_H
-#define RENDERER_H
+#pragma once
 
 #include "animation.h"
 #include "asset_cache.h"
@@ -31,4 +30,3 @@ public:
 };
 
 } // namespace sp9k
-#endif

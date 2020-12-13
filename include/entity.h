@@ -1,5 +1,4 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -25,4 +24,3 @@ public:
   bool collidesWith(const Entity &entity) const;
 };
 } // namespace sp9k
-#endif

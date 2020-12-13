@@ -1,12 +1,10 @@
+#pragma once
 #include "asset_cache.h"
 #include "background.h"
 #include "game.h"
 #include "renderer.h"
 #include "state_context.h"
 #include <SFML/Graphics.hpp>
-
-#ifndef APPLICATION_H
-#define APPLICATION_H
 
 #ifndef VERSION
 #define VERSION "Unknown version"
@@ -32,5 +30,3 @@ public:
   void run();
 };
 } // namespace sp9k
-
-#endif

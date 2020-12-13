@@ -1,5 +1,4 @@
-#ifndef BULLET_H
-#define BULLET_H
+#pragma once
 
 #include "entity.h"
 #include <SFML/Graphics.hpp>
@@ -12,4 +11,3 @@ public:
   void update(float dt);
 };
 } // namespace sp9k
-#endif

@@ -1,5 +1,4 @@
-#ifndef MENU_STATE_H
-#define MENU_STATE_H
+#pragma once
 
 #include "abstract_state.h"
 
@@ -16,4 +15,3 @@ public:
   void render(Renderer renderer);
 };
 } // namespace sp9k
-#endif

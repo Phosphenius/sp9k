@@ -1,5 +1,4 @@
-#ifndef ASSET_CACHE_H
-#define ASSET_CACHE_H
+#pragma once
 
 #include <algorithm>
 #include <memory>
@@ -14,4 +13,3 @@ public:
   const T &getAsset(const std::string &name) const;
 };
 } // namespace sp9k
-#endif

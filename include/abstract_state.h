@@ -1,5 +1,4 @@
-#ifndef STATE_H
-#define STATE_H
+#pragma once
 
 #include "renderer.h"
 
@@ -25,4 +24,3 @@ public:
   virtual void render(Renderer renderer) = 0;
 };
 } // namespace sp9k
-#endif

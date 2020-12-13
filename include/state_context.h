@@ -1,5 +1,4 @@
-#ifndef STATE_CONTEXT_H
-#define STATE_CONTEXT_H
+#pragma once
 
 #include "abstract_state.h"
 #include "game_over_state.h"
@@ -29,5 +28,3 @@ public:
   AbstractState *getGameOverState();
 };
 } // namespace sp9k
-
-#endif

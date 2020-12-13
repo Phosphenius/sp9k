@@ -1,5 +1,4 @@
-#ifndef H_ENEMY
-#define H_ENEMY
+#pragma once
 
 #include "entity.h"
 
@@ -10,5 +9,3 @@ public:
   void update(float dt);
 };
 } // namespace sp9k
-
-#endif

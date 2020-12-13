@@ -1,5 +1,4 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include "entity.h"
 #include <SFML/Graphics.hpp>
@@ -16,4 +15,3 @@ public:
   float getHealthPercentage();
 };
 } // namespace sp9k
-#endif
