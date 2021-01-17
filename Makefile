@@ -6,7 +6,7 @@ ASSETDIR ?= $(shell pwd)
 CXXFLAGS += -Wall -Werror -pedantic -Wextra -std=c++17 -g -Og \
 						-Wnull-dereference -Wold-style-cast \
 						-DVERSION=\"$(VERSION)$(BUILDMETA)\" -DASSETDIR=\"$(ASSETDIR)\"  
-LDLIBS += -lsfml-graphics -lsfml-window -lsfml-system
+LDLIBS += -lsfml-graphics -lsfml-window -lsfml-system -lreadline
 CPPFLAGS += -I include -MMD -MP
 
 ifeq ($(VERSION),)
